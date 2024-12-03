@@ -120,6 +120,9 @@ body {
     6px 6px 15px rgba(0, 0, 0, 0.4), /* Darker shadow */
     8px 8px 20px rgba(0, 0, 0, 0.5); /* Darkest shadow */
 }
+.featureIcons{
+  font-size: 3rem;
+}
 
   @media (max-width: 768px) {
     .bd-placeholder-img-lg {
