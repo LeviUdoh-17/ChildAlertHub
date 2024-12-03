@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Child Alert Hub is a web-based platform dedicated to raising awareness about missing children and facilitating their safe recovery. The platform collaborates with trusted authorities, such as the police, to provide verified and up-to-date reports on missing child cases. Users must log in to access detailed information, ensuring the security and credibility of the system.">
+        <meta name="author" content="Levi Udoh">
+        <title>Child Alert Hub</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body class="h-100  text-white bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Child Alert Hub</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav d-flex justify-content-end ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item ">
+                            <a class="nav-link active" aria-current="page" href="http://127.0.0.1:5000/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#About">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#JoinIn">Report</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#JoinIn">Log In</a>
+                        </li>
+                    </ul>
+              </div>
+            </div>
+        </nav>
+
+        <main class="mt-5">
+            <section id="hero" class="text-center mb-5 d-flex flex-column justify-content-center">
+                <h1>Help Reunite Families <br>One Alert at a Time.</h1>
+                <p class="lead pt-5"><a href="#JoinIn" class="btn btn-lg btn-secondary fw-bold border-white text-dark bg-white">Get Started</a></p>
+            </section>
+            <section id="quickStats" class="d-flex px-5 mx-5 mb-5 flex-column text-center justify-content-center">
+                <h1>Numbers of Abductions in Nigeria: <br> <span id="KidnapCases">0</span></h1>
+            </section>
+            <section id="JoinIn" class="bg-light text-dark">
+                <h1 class="py-5 text-center">Create Account or Login <br>to Stay Connected</h1>
+                <div id="loginSignUpToggle" class="w-50 text-center mx-auto">
+                    <button id="login-btn" class="btn toggleButton toggleactive">Login</button>
+                    <button id="signup-btn" class="btn toggleButton">Sign Up</button>
+                </div>
+                <!-- LOGIN FORM -->
+                <form id="loginForm" class="w-50 mt-5 mx-auto">
+                    <div class="mb-3">
+                        <label for="loginUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="loginUsername" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-dark mb-5">Login</button>
+                </form>
+
+                <!-- SIGNUP FORM -->
+                <form id="signUpForm" class="w-50 mt-5 mx-auto">
+                    <div class="mb-3">
+                        <label for="signupUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="signupUsername" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="signupPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="signupPassword" name="password" required>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="public-user-radio" name="userType" value="Public" required>
+                        <label class="form-check-label" for="public-user-radio">Public User</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="authority-member-radio" name="userType" value="Authority">
+                        <label class="form-check-label" for="authority-member-radio">Authority Member</label>
+                    </div>
+                    <button type="submit" class="btn btn-dark mb-5">Sign Up</button>
+                </form>
+
+            </section>
+            <section id="About" class="container py-5">
+                <h1 class="text-center pb-3">Who Are We?</h1>
+                <article class="pb-3"><strong>Child Alert Hub</strong> is a web-based platform dedicated to raising awareness about missing children and facilitating their safe recovery. The platform collaborates with trusted authorities, such as the police, to provide verified and up-to-date reports on missing child cases. Users must log in to access detailed information, ensuring the security and credibility of the system. <br>
+                </article>
+                <h5 class="text-center">
+                    Key features of the Hub include:
+                </h5>
+                <!-- USE CARDS LATER -->
+                <ul>
+                    <li>
+                        <strong>Alerts and Reports:</strong> Displaying critical details about missing children, including names, images, and last known locations.
+                    </li>
+                    <li>
+                        <strong>Community Engagement:</strong> Allowing users to share information, report suspicious activities,
+                    </li>
+                    <li>
+                        <strong>User Authentication:</strong> A secure login system for public users and authorized personnel.
+                    </li>
+                    <li>
+                        <strong>Real-Time Updates:</strong> Immediate notifications for new or resolved cases.
+                    </li>
+                </ul>
+                <p>The primary goal of <strong>Child Alert Hub</strong> is to create a centralized and reliable source of information, fostering community involvement and aiding in the safe return of missing children.</p>
+
+                <div id="missionVision" class="row py-5">
+                    <div class="col-12 col-md-6 pb-5">
+                        <img src="{{ url_for('static', filename='Images/mission.jpg') }}" alt="mission image">
+                    </div>
+                    <div class="col-12 col-md-6 d-flex pb-5 flex-column justify-content-center">
+                        <h5>Mission Statement</h5>
+                        <p>To provide a reliable, secure, and accessible platform that bridges the gap between the public and trusted authorities, ensuring timely dissemination of missing child alerts to foster community vigilance and aid in swift recovery efforts.</p>
+                    </div>
+                    <div class="col-12 col-md-6 d-flex flex-column justify-content-center">
+                        <h5>Vision Statement</h5>
+                        <p>To create a globally trusted hub that empowers communities through collaboration and technology, striving toward a future where no missing child is left unaccounted for and safety is a shared responsibility.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <img src="{{ url_for('static', filename='Images/vision.jpg') }}" alt="vision image">
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-auto text-white-50">
+            <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='app.js') }}"></script>
+    </body>
+</html>
