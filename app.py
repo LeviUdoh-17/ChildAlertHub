@@ -1,16 +1,34 @@
 from flask import Flask, jsonify, request, render_template, redirect, session
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
 app = Flask(__name__)
 
 app.secret_key = 'ukaraobong'
 
+DATABASE = 'database.db'
+
 # Connect to SQLite database
 def get_db_connection():
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     return conn
+
+# Initialize the database schema
+def init_db():
+    if not os.path.exists(DATABASE):
+        conn = get_db_connection()
+        with conn:
+            conn.execute('''
+                CREATE TABLE users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT UNIQUE NOT NULL,
+                    password TEXT NOT NULL,
+                    user_type TEXT NOT NULL
+                )
+            ''')
+        conn.close()
 
 # Home page route
 @app.route('/')
@@ -50,27 +68,6 @@ def register():
     return jsonify({'message': 'User registered successfully'}), 201
 
 # Route to login a user
-# @app.route('/login', methods=['POST'])
-# def login():
-#     data = request.json
-
-#     username = data.get('username')
-#     password = data.get('password')
-
-#     # Validate inputs
-#     if not username or not password:
-#         return jsonify({'error': 'All fields are required'}), 400
-
-#     conn = get_db_connection()
-#     user = conn.execute('SELECT * FROM users WHERE username = ?', (username,)).fetchone()
-#     conn.close()
-
-#     if user and check_password_hash(user['password'], password):
-#         render_template('dashboard.html')
-#         return jsonify({'message': f'Welcome {username}', 'user_type': user['user_type']}), 200
-
-#     else:
-#         return jsonify({'error': 'Invalid credentials'}), 401
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -96,7 +93,6 @@ def login():
     else:
         return jsonify({'error': 'Invalid credentials'}), 401
 
-
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
     if 'user_id' not in session:
@@ -104,6 +100,6 @@ def dashboard():
         return redirect('/login')
     return render_template('dashboard.html', username=session['username'])
 
-
 if __name__ == '__main__':
+    init_db()
     app.run(debug=True)
