@@ -9,6 +9,12 @@
   color: #333;
   text-shadow: none; /* Prevent inheritance from `body` */
 }
+a{
+  color: #bdb7b7;
+}
+a:hover{
+  color: #fff;
+}
 
 
 /*
