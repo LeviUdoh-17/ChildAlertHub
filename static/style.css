@@ -133,6 +133,69 @@ body {
     border: 1px solid #4d4c4c;
 }
 
+/* Navbar Styles */
+.navbar {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+    font-weight: 500;
+    margin-right: 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #000;
+    font-weight: 500;
+    margin-right: 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    transform: scale(1.1);
+}
+
+.navbar-nav .nav-link:focus {
+    outline: none;
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+/* Change navbar background color on scroll */
+body.scrolled .navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Change navbar link colors based on background */
+body.scrolled .navbar-dark .nav-link {
+    color: #fff;
+}
+
+body.scrolled .navbar-light .nav-link {
+    color: #000;
+}
+
+/* Bounce effect on hover */
+.navbar-nav .nav-link:hover {
+    animation: bounce 0.3s;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
   @media (max-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
