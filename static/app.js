@@ -7,6 +7,13 @@ document.addEventListener("DOMContentLoaded", function() {
             document.body.classList.remove("scrolled");
         }
     });
+
+    // Trigger animations for hero section
+    const heroH1 = document.querySelector(".hero-h1");
+    const heroP = document.querySelector(".hero-p");
+
+    heroH1.style.animationDelay = "0.5s";
+    heroP.style.animationDelay = "1s";
 });
 
 document.addEventListener("DOMContentLoaded", () => {
