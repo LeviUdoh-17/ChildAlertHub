@@ -10,10 +10,10 @@
   text-shadow: none; /* Prevent inheritance from `body` */
 }
 a{
-  color: #bdb7b7;
+  color: #bdb7b7 !important;
 }
 a:hover{
-  color: #fff;
+  color: #fff !important;
 }
 
 
@@ -162,16 +162,16 @@ body {
 
 /* Change navbar background color on scroll */
 body.scrolled .navbar {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Change navbar link colors based on background */
 body.scrolled .navbar-dark .nav-link {
-    color: #fff;
+    color: #fff !important;
 }
 
 body.scrolled .navbar-light .nav-link {
-    color: #000;
+    color: #000 !important;
 }
 
 /* Bounce effect on hover */
