@@ -10,7 +10,7 @@
   text-shadow: none; /* Prevent inheritance from `body` */
 }
 a{
-  color: #bdb7b7 !important;
+  color: #dadada !important;
 }
 a:hover{
   color: #fff !important;
@@ -210,6 +210,13 @@ body.scrolled .navbar-light .nav-link {
 /* Bounce effect on hover */
 .navbar-nav .nav-link:hover {
     animation: bounce 0.3s;
+}
+
+.navbar-toggler-icon {
+    background-color: #fff;
+}
+.navbar-toggler{
+  background-color: #333;
 }
 
 @keyframes bounce {
