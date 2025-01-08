@@ -91,7 +91,6 @@ body.scrolled .navbar-light .nav-link {
 
 /* HERO SECTION*/
 #hero{
-    margin-top: 1%;
     background: 
         radial-gradient(circle, #6c6c6c8c, #0e0e0ee2),
         url("Images/child.webp");
