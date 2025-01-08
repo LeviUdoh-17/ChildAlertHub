@@ -35,45 +35,59 @@ body {
 }
 
 
-/*
- * Header
- */
- #childAlertLogo{
-    width: 15rem;
-    text-align: center;
-    padding-bottom: 2rem;
- }
-
-.nav-masthead .nav-link {
-  padding: .25rem 0;
-  font-weight: 700;
-  color: rgba(255, 255, 255, .5);
-  background-color: transparent;
-  border-bottom: .25rem solid transparent;
+/* Navbar Styles */
+.navbar {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
 }
 
-.nav-masthead .nav-link:hover,
-.nav-masthead .nav-link:focus {
-  border-bottom-color: rgba(255, 255, 255, .25);
-  color: #fff;
+.navbar-dark .navbar-nav .nav-link,
+.navbar-light .navbar-nav .nav-link {
+    font-weight: 500;
+    margin-right: 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.nav-masthead .nav-link + .nav-link {
-  margin-left: 1rem;
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #fff;
+    transform: scale(1.1);
 }
 
-.nav-masthead .active {
-  color: #fff;
-  border-bottom-color: #fff;
+.navbar-brand {
+    font-weight: 700;
 }
 
-.bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
+/* Change navbar background color on scroll */
+body.scrolled .navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Change navbar link colors based on background */
+body.scrolled .navbar-dark .nav-link {
+    color: #fff;
+}
+
+body.scrolled .navbar-light .nav-link {
+    color: #000;
+}
+
+/* Bounce effect on hover */
+.navbar-nav .nav-link:hover {
+    animation: bounce 0.3s;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
 
 /* HERO SECTION*/
 #hero{
@@ -172,66 +186,8 @@ body {
     border: 1px solid #4d4c4c;
 }
 
-/* Navbar Styles */
-.navbar {
-    background-color: transparent;
-    transition: background-color 0.3s ease;
-}
 
-.navbar-dark .navbar-nav .nav-link,
-.navbar-light .navbar-nav .nav-link {
-    font-weight: 500;
-    margin-right: 1rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.navbar-nav .nav-link:hover {
-    transform: scale(1.1);
-}
-
-.navbar-brand {
-    font-weight: 700;
-}
-
-/* Change navbar background color on scroll */
-body.scrolled .navbar {
-    background-color: rgba(0, 0, 0, 0.8) !important;
-}
-
-/* Change navbar link colors based on background */
-body.scrolled .navbar-dark .nav-link {
-    color: #fff !important;
-}
-
-body.scrolled .navbar-light .nav-link {
-    color: #000 !important;
-}
-
-/* Bounce effect on hover */
-.navbar-nav .nav-link:hover {
-    animation: bounce 0.3s;
-}
-
-.navbar-toggler-icon {
-    background-color: #fff;
-}
-.navbar-toggler{
-  background-color: #333;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-10px);
-    }
-    60% {
-        transform: translateY(-5px);
-    }
-}
-
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
     }
