@@ -277,7 +277,7 @@ body.scrolled .custom-navbar {
     font-size: calc(1rem + 1vw);
     margin-top: 3rem;
 }
-#kidnapCases{
+#KidnapCases{
     font-size: 4rem;
 }
 @media (max-width: 768px) {
