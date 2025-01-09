@@ -302,6 +302,11 @@ body.scrolled .custom-navbar {
 }
 
 /* ABOUT SECTION */
+#missionVision{
+    width: 70vw;
+    margin: auto;
+    text-align: center;
+}
   .featureIcons{
     font-size: 2rem;
   }
