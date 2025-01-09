@@ -333,7 +333,7 @@ body.scrolled .custom-navbar {
 }
 
 @media (max-width: 768px) {
-    .featurecards{
+    .featureCards{
         max-width: 90vw;
         margin-left: auto;
         margin-right: auto !important;
