@@ -195,13 +195,21 @@ body.scrolled .custom-navbar {
 
     .custom-navbar .navbar-collapse.show {
         display: flex;
+        background-color: transparent;
+    }
+
+    .custom-navbar .navbar-nav{
+        width: 100%;
+        flex-flow: column;
+        text-align: start;
+        align-self: start;
     }
 
     .custom-navbar .nav-item {
         margin: 0;
-        padding: 1rem;
+        padding: 0 2rem;
         width: 100%;
-        text-align: center;
+        text-align: start;
     }
 }
 
