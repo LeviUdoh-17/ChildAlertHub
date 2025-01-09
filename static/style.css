@@ -324,9 +324,10 @@ body.scrolled .custom-navbar {
     8px 8px 20px rgba(0, 0, 0, 0.5); /* Darkest shadow */
     border: 1px solid #4d4c4c;
     border-radius: 15px;
+    margin: .8rem;
 }
 @media (min-width: 768px) {
-    .featurecards {
+    .featureCards {
         flex: 0 0 auto;
         width: 48%;
     }
