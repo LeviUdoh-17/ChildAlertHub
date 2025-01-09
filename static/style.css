@@ -302,14 +302,6 @@ body.scrolled .custom-navbar {
 }
 
 /* ABOUT SECTION */
-#missionVision>div>img{
-    width: 100%;
-    box-shadow: 
-    2px 2px 5px rgba(0, 0, 0, 0.2),  /* Light shadow */
-    4px 4px 10px rgba(0, 0, 0, 0.3), /* Medium shadow */
-    6px 6px 15px rgba(0, 0, 0, 0.4), /* Darker shadow */
-    8px 8px 20px rgba(0, 0, 0, 0.5); /* Darkest shadow */
-  }
   .featureIcons{
     font-size: 2rem;
   }
