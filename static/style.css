@@ -73,7 +73,7 @@ body.scrolled .navbar-light .nav-link {
     color: #000;
 }
 body.scrolled .navbar-nav {
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 /* Collapse button color */
 .navbar-toggler {
