@@ -149,6 +149,7 @@ body.scrolled .navbar-light .nav-link {
 }
 
 .custom-navbar .navbar-nav {
+    flex-flow: row;
     list-style: none;
     display: flex;
     margin: 0;
