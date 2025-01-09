@@ -311,7 +311,10 @@ body.scrolled .custom-navbar {
     8px 8px 20px rgba(0, 0, 0, 0.5); /* Darkest shadow */
   }
   .featureIcons{
-    font-size: 3rem;
+    font-size: 2rem;
+  }
+  .featureCardHeaders{
+    font-size: calc(1.4rem + 0.6vw);
   }
   .featureCards{
     box-shadow: 
@@ -320,8 +323,14 @@ body.scrolled .custom-navbar {
     6px 6px 15px rgba(0, 0, 0, 0.4), /* Darker shadow */
     8px 8px 20px rgba(0, 0, 0, 0.5); /* Darkest shadow */
     border: 1px solid #4d4c4c;
+    border-radius: 15px;
 }
-
+@media (min-width: 768px) {
+    .featureCards {
+        flex: 0 0 auto;
+        width: 48%;
+    }
+}
 
 @media (max-width: 768px) {
     .bd-placeholder-img-lg {
