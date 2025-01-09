@@ -28,6 +28,7 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   overflow-x: hidden;
+  background-color: #000;
 }
 
 .cover-container {
@@ -223,7 +224,6 @@ body.scrolled .custom-navbar {
     background-position: center;
     background-size: cover;
     height: 100vh;
-    border: 1px solid #333;
 }
 #hero>h1{
     font-weight: 700;
@@ -274,6 +274,15 @@ body.scrolled .custom-navbar {
 #quickStats>h1{
     line-height: 2;
     color: #fff;
+    font-size: calc(1rem + 1vw);
+}
+#kidnapCases{
+    font-size: 3rem;
+}
+@media (max-width: 768px) {
+    #KidnapCases {
+        font-size: 3.5rem;
+    }
 }
 .toggleButton{
     padding: 5px 10px !important;
