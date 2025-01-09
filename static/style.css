@@ -326,7 +326,7 @@ body.scrolled .custom-navbar {
     border-radius: 15px;
 }
 @media (min-width: 768px) {
-    .featureCards {
+    .featurecards {
         flex: 0 0 auto;
         width: 48%;
     }
