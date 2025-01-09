@@ -333,6 +333,11 @@ body.scrolled .custom-navbar {
 }
 
 @media (max-width: 768px) {
+    .featurecards{
+        max-width: 90vw;
+        margin-left: auto;
+        margin-right: auto !important;
+    }
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
     }
