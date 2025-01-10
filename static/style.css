@@ -343,3 +343,246 @@ body.scrolled .custom-navbar {
         font-size: 1.5rem;
     }
   }
+
+/* LOGIN PAGE */
+#loginPage{
+    background: 
+        radial-gradient(circle, #6c6c6c8c, #0e0e0ee2),
+        url("Images/cole-keister-rPlYtGgoxho-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    color: white;
+}
+/* styles.css */
+.form-container {
+background-color: #1e1e1e;
+border-radius: 8px;
+padding: 20px 30px;
+width: 400px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.custom-form .form-group {
+position: relative;
+margin-bottom: 20px;
+}
+
+.custom-form input {
+width: 100%;
+padding: 10px 12px;
+background-color: #2e2e2e;
+border: none;
+border-radius: 5px;
+font-size: 16px;
+color: white;
+}
+
+.custom-form input:focus {
+outline: none;
+border: 1px solid #4a90e2;
+}
+
+.custom-form label {
+position: absolute;
+top: 12px;
+left: 12px;
+font-size: 14px;
+color: #aaa;
+transition: all 0.3s ease;
+pointer-events: none;
+}
+
+.custom-form input:focus + label,
+.custom-form input:not(:placeholder-shown) + label {
+top: -10px;
+left: 12px;
+font-size: 12px;
+color: #4a90e2;
+}
+
+.custom-form .toggle-password {
+position: absolute;
+right: 12px;
+top: 50%;
+transform: translateY(-50%);
+cursor: pointer;
+color: #aaa;
+}
+
+/* INLINE GROUP for First Name and Last Name */
+.inline-group {
+display: flex;
+gap: 10px;
+}
+
+.inline-group .form-group {
+flex: 1;
+}
+
+.form-actions {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.secondary-btn {
+background: none;
+color: #aaa;
+border: none;
+cursor: pointer;
+font-size: 14px;
+transition: color 0.3s ease;
+}
+
+.secondary-btn:hover {
+color: #4a90e2;
+}
+
+.primary-btn {
+background-color: #4a90e2;
+color: white;
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+transition: background-color 0.3s ease;
+}
+
+.primary-btn:hover {
+background-color: #357ab8;
+}
+
+/* Actions */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+  
+.primary-btn {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+  
+.primary-btn:hover {
+    background-color: #357ab8;
+}
+  
+  /* Links */
+.form-links {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+  
+.forgot-password, .sign-up-link {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+  
+.forgot-password:hover, .sign-up-link:hover {
+    color: #357ab8;
+}
+
+/* Form Container Styles */
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.form-container.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.form-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Toggle Password Visibility */
+.toggle-password {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Form Group Styles */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+}
+
+.form-group label {
+    position: absolute;
+    top: -1rem;
+    left: 0.75rem;
+    background-color: #333;
+    padding: 0 0.25rem;
+    color: #fff;
+}
+
+/* Form Actions */
+.form-actions {
+    text-align: center;
+}
+
+.primary-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.primary-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Form Links */
+.form-links {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.form-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.form-links a:hover {
+    text-decoration: underline;
+}

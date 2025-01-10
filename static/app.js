@@ -22,6 +22,95 @@ document.addEventListener("DOMContentLoaded", function() {
     navbarToggler.addEventListener("click", function() {
         navbarCollapse.classList.toggle("show");
     });
+
+    // Toggle between login and signup forms
+    const loginSection = document.getElementById("LogIn");
+    const signUpSection = document.getElementById("SignUp");
+    const signUpLink = document.querySelector(".sign-up-link");
+    const loginLink = document.querySelector(".login-link");
+
+    signUpLink.addEventListener("click", function(event) {
+        event.preventDefault();
+        loginSection.style.display = "none";
+        signUpSection.style.display = "block";
+        signUpSection.querySelector(".form-container").classList.add("visible");
+        loginSection.querySelector(".form-container").classList.remove("visible");
+    });
+
+    loginLink.addEventListener("click", function(event) {
+        event.preventDefault();
+        signUpSection.style.display = "none";
+        loginSection.style.display = "block";
+        loginSection.querySelector(".form-container").classList.add("visible");
+        signUpSection.querySelector(".form-container").classList.remove("visible");
+    });
+
+    // Toggle password visibility
+    document.querySelectorAll('.toggle-password').forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+            const passwordInput = this.previousElementSibling;
+            const isPasswordVisible = passwordInput.type === 'password';
+            passwordInput.type = isPasswordVisible ? 'text' : 'password';
+            this.textContent = isPasswordVisible ? '👁️‍🗨️' : '👁️';
+        });
+    });
+
+    // Handle login form submission
+    const loginForm = document.getElementById("login-form");
+    loginForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+        const username = document.getElementById("login-username").value;
+        const password = document.getElementById("login-password").value;
+
+        try {
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                } else {
+                    console.error("Unexpected response:", data);
+                }
+            } else {
+                const errorData = await response.json();
+                alert(errorData.error || "An error occurred");
+            }
+        } catch (err) {
+            console.error("Error:", err);
+            alert("An error occurred. Please try again.");
+        }
+    });
+
+    // Handle signup form submission
+    const signupForm = document.getElementById("signup-form");
+    signupForm.addEventListener("submit", async function(event) {
+        event.preventDefault();
+        const username = document.getElementById("signup-username").value;
+        const password = document.getElementById("signup-password").value;
+
+        try {
+            const response = await fetch("/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password, user_type: "Public" }),
+            });
+
+            const result = await response.json();
+            alert(result.message || result.error);
+        } catch (error) {
+            console.error("Signup error:", error);
+            alert("Signup failed. Please try again.");
+        }
+    });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,7 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const target = 3620;
   const duration = 2000;
   const increment = target / (duration / 16);
-
 
   // Counter Animation
   function updateCounter() {
