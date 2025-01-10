@@ -338,6 +338,9 @@ body.scrolled .custom-navbar {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
     }
+    #navbar-toggler{
+        display: none;
+    }
     #quickStats>h1{
         font-size: 1.5rem;
     }
@@ -401,6 +404,7 @@ body.scrolled .custom-navbar {
 }
 
 .custom-form label {
+    display: none;
     position: absolute;
     top: 50%;
     left: 12px;
@@ -410,7 +414,13 @@ body.scrolled .custom-navbar {
     transition: all 0.3s ease;
     pointer-events: none;
 }
-
+span.fullstop {
+    font-size: 4rem;
+    color: #4a90e2;
+}
+#navbar-toggler{
+    display: none;
+}
 .custom-form input:focus + label,
 .custom-form input:not(:placeholder-shown) + label {
     top: -10px;
