@@ -339,7 +339,7 @@ body.scrolled .custom-navbar {
       font-size: 3.5rem;
     }
     #navbar-toggler{
-        display: none;
+        display: block;
     }
     #quickStats>h1{
         font-size: 1.5rem;
@@ -356,6 +356,7 @@ body.scrolled .custom-navbar {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-position-x: center   ;
 }
 
 /* Form Container Styles */
