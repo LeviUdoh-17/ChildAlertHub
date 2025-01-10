@@ -31,6 +31,11 @@ body {
 background-color: #000 !important;
 }
 
+body#loginPage {
+    background: url("{{ url_for('static', filename='Images/background.jpg') }}") no-repeat center center fixed;
+    background-size: cover;
+}
+
 .cover-container {
   max-width: 42em;
 }
@@ -354,6 +359,10 @@ body.scrolled .custom-navbar {
     align-items: center;
     height: 100vh;
 }
+body#loginPage {
+    background: url("{{ url_for('static', filename='Images/background.jpg') }}") no-repeat center center fixed;
+    background-size: cover;
+}
 /* styles.css */
 .form-container {
     background-color: #1e1e1e;
@@ -378,78 +387,78 @@ body.scrolled .custom-navbar {
 }
 
 .custom-form input:focus {
-outline: none;
-border: 1px solid #4a90e2;
+    outline: none;
+    border: 1px solid #4a90e2;
 }
 
 .custom-form label {
-position: absolute;
-top: 12px;
-left: 12px;
-font-size: 14px;
-color: #aaa;
-transition: all 0.3s ease;
-pointer-events: none;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 14px;
+    color: #aaa;
+    transition: all 0.3s ease;
+    pointer-events: none;
 }
 
 .custom-form input:focus + label,
 .custom-form input:not(:placeholder-shown) + label {
-top: -10px;
-left: 12px;
-font-size: 12px;
+    top: -10px;
+    left: 12px;
+    font-size: 12px;
 }
 
 .custom-form .toggle-password {
-position: absolute;
-right: 12px;
-top: 50%;
-transform: translateY(-50%);
-cursor: pointer;
-color: #aaa;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
 }
 
 /* INLINE GROUP for First Name and Last Name */
 .inline-group {
-display: flex;
-gap: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 .inline-group .form-group {
-flex: 1;
+    flex: 1;
 }
 
 .form-actions {
-display: flex;
-justify-content: space-between;
-align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .secondary-btn {
-background: none;
-color: #aaa;
-border: none;
-cursor: pointer;
-font-size: 14px;
-transition: color 0.3s ease;
+    background: none;
+    color: #aaa;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.3s ease;
 }
 
 .secondary-btn:hover {
-color: #4a90e2;
+    color: #4a90e2;
 }
 
 .primary-btn {
-background-color: #4a90e2;
-color: white;
-border: none;
-padding: 10px 20px;
-border-radius: 5px;
-cursor: pointer;
-font-size: 16px;
-transition: background-color 0.3s ease;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .primary-btn:hover {
-background-color: #357ab8;
+    background-color: #357ab8;
 }
 
 /* Actions */

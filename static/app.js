@@ -22,41 +22,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Navbar toggler
-    // const navbarToggler = document.getElementById("navbar-toggler");
-    // const navbarCollapse = document.getElementById("navbar-collapse");
+    const navbarToggler = document.getElementById("navbar-toggler");
+    const navbarCollapse = document.getElementById("navbar-collapse");
 
-    // if (navbarToggler && navbarCollapse) {
-    //     navbarToggler.addEventListener("click", function () {
-    //         navbarCollapse.classList.toggle("show");
-    //     });
-    // }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const navbarToggler = document.getElementById("navbar-toggler");
-        const navbarCollapse = document.getElementById("navbar-collapse");
-    
-        navbarToggler.addEventListener("click", () => {
+    if (navbarToggler && navbarCollapse) {
+        navbarToggler.addEventListener("click", function () {
             navbarCollapse.classList.toggle("show");
         });
-    
-        // Toggle password visibility
-        const togglePasswordButtons = document.querySelectorAll(".toggle-password");
-    
-        togglePasswordButtons.forEach(button => {
-            button.addEventListener("click", (event) => {
-                const passwordInput = event.target.previousElementSibling;
-                const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-                passwordInput.setAttribute("type", type);
-            });
-        });
-    });
-    
+    }
 
     // Toggle between login and signup forms
     const loginSection = document.getElementById("LogIn");
     const signUpSection = document.getElementById("SignUp");
-    const signUpLink = document.querySelector("#sign-up-link");
-    const loginLink = document.querySelector("#login-link");
+    const signUpLink = document.getElementById("sign-up-link");
+    const loginLink = document.getElementById("login-link");
 
     if (signUpLink && loginLink && loginSection && signUpSection) {
         signUpLink.addEventListener("click", function (event) {
@@ -71,6 +50,16 @@ document.addEventListener("DOMContentLoaded", function () {
             loginSection.style.display = "block";
         });
     }
+
+    // Toggle password visibility
+    document.querySelectorAll('.toggle-password').forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+            const passwordInput = this.previousElementSibling;
+            const isPasswordVisible = passwordInput.type === 'password';
+            passwordInput.type = isPasswordVisible ? 'text' : 'password';
+            this.textContent = isPasswordVisible ? '👁️‍🗨️' : '👁️';
+        });
+    });
 
     // Handle login form submission
     const loginForm = document.getElementById("login-form");
