@@ -86,14 +86,13 @@ body.scrolled .navbar-nav {
 
 /* Custom Navbar Styles */
 .custom-navbar {
+    background-color: transparent;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 1rem;
-    background-color: transparent;
     position: fixed;
-    width: 100%;
     top: 0;
+    width: 100%;
     z-index: 1000;
     transition: background-color 0.3s ease;
 }
@@ -112,11 +111,11 @@ body.scrolled .navbar-nav {
 }
 
 .custom-navbar .navbar-toggler {
-    display: none;
-    background: none;
+    display: block;
     border: none;
-    cursor: pointer;
+    background: none;
 }
+
 
 .custom-navbar .navbar-toggler-icon {
     width: 30px;
@@ -345,42 +344,37 @@ body.scrolled .custom-navbar {
   }
 
 /* LOGIN PAGE */
-#loginPage{
-    background: 
-        radial-gradient(circle, #6c6c6c8c, #0e0e0ee2),
-        url("Images/cole-keister-rPlYtGgoxho-unsplash.jpg");
+#loginPage {
+    background: radial-gradient(circle, #6c6c6c8c, #0e0e0ee2),
+        url("Images/login-background.jpg");
     background-repeat: no-repeat;
-    background-position: center;
     background-size: cover;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    color: white;
+    height: 100vh;
 }
 /* styles.css */
 .form-container {
-background-color: #1e1e1e;
-border-radius: 8px;
-padding: 20px 30px;
-width: 400px;
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 20px 30px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .custom-form .form-group {
-position: relative;
-margin-bottom: 20px;
+    position: relative;
+    margin-bottom: 20px;
 }
 
 .custom-form input {
-width: 100%;
-padding: 10px 12px;
-background-color: #2e2e2e;
-border: none;
-border-radius: 5px;
-font-size: 16px;
-color: white;
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #2e2e2e;
+    border: none;
+    border-radius: 5px;
+    color: white;
 }
 
 .custom-form input:focus {
