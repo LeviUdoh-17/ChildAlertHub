@@ -403,7 +403,6 @@ pointer-events: none;
 top: -10px;
 left: 12px;
 font-size: 12px;
-color: #4a90e2;
 }
 
 .custom-form .toggle-password {
@@ -548,9 +547,10 @@ background-color: #357ab8;
     position: absolute;
     top: -1rem;
     left: 0.75rem;
-    background-color: #333;
+    background-color: #3333339b;
     padding: 0 0.25rem;
-    color: #fff;
+    color: #fff !important;
+    border-radius: 5px;
 }
 
 /* Form Actions */
