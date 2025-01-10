@@ -361,7 +361,7 @@ body.scrolled .custom-navbar {
 /* Form Container Styles */
 .form-container {
     margin: auto;
-    background-color: #1e1e1e;
+    background-color: #1e1e1ea8;
     border-radius: 8px;
     padding: 20px 30px;
     width: 400px;
