@@ -102,7 +102,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (signupForm) {
         signupForm.addEventListener("submit", async function (event) {
             event.preventDefault();
+            const firstName = document.getElementById("signup-firstname").value;
+            const lastName = document.getElementById("signup-lastname").value;
             const username = document.getElementById("signup-username").value;
+            const email = document.getElementById("signup-email").value;
             const password = document.getElementById("signup-password").value;
 
             try {
@@ -111,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ username, password }),
+                    body: JSON.stringify({ firstName, lastName, username, email, password }),
                 });
 
                 const result = await response.json();

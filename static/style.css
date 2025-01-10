@@ -31,11 +31,6 @@ body {
 background-color: #000 !important;
 }
 
-body#loginPage {
-    background: url("{{ url_for('static', filename='Images/background.jpg') }}") no-repeat center center fixed;
-    background-size: cover;
-}
-
 .cover-container {
   max-width: 42em;
 }
@@ -351,7 +346,7 @@ body.scrolled .custom-navbar {
 /* LOGIN PAGE */
 #loginPage {
     background: radial-gradient(circle, #6c6c6c8c, #0e0e0ee2),
-        url("Images/login-background.jpg");
+        url("Images/cole-keister-rPlYtGgoxho-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -359,19 +354,28 @@ body.scrolled .custom-navbar {
     align-items: center;
     height: 100vh;
 }
-body#loginPage {
-    background: url("{{ url_for('static', filename='Images/background.jpg') }}") no-repeat center center fixed;
-    background-size: cover;
-}
-/* styles.css */
+
+/* Form Container Styles */
 .form-container {
     background-color: #1e1e1e;
     border-radius: 8px;
     padding: 20px 30px;
     width: 400px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+.form-container.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.form-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Custom Form Styles */
 .custom-form .form-group {
     position: relative;
     margin-bottom: 20px;
@@ -406,6 +410,7 @@ body#loginPage {
     top: -10px;
     left: 12px;
     font-size: 12px;
+    color: #4a90e2;
 }
 
 .custom-form .toggle-password {
@@ -427,152 +432,24 @@ body#loginPage {
     flex: 1;
 }
 
-.form-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.secondary-btn {
-    background: none;
-    color: #aaa;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    transition: color 0.3s ease;
-}
-
-.secondary-btn:hover {
-    color: #4a90e2;
-}
-
-.primary-btn {
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.primary-btn:hover {
-    background-color: #357ab8;
-}
-
-/* Actions */
-.form-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-  
-.primary-btn {
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-  
-.primary-btn:hover {
-    background-color: #357ab8;
-}
-  
-  /* Links */
-.form-links {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-}
-  
-.forgot-password, .sign-up-link {
-    color: #4a90e2;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-  
-.forgot-password:hover, .sign-up-link:hover {
-    color: #357ab8;
-}
-
-/* Form Container Styles */
-.form-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #333;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.form-container.hidden {
-    opacity: 0;
-    transform: translateY(-20px);
-}
-
-.form-container.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Toggle Password Visibility */
-.toggle-password {
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* Form Group Styles */
-.form-group {
-    position: relative;
-    margin-bottom: 1.5rem;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #444;
-    color: #fff;
-}
-
-.form-group label {
-    position: absolute;
-    top: -1rem;
-    left: 0.75rem;
-    background-color: #3333339b;
-    padding: 0 0.25rem;
-    color: #fff !important;
-    border-radius: 5px;
-}
-
 /* Form Actions */
 .form-actions {
     text-align: center;
 }
 
 .primary-btn {
-    padding: 0.75rem 1.5rem;
+    background-color: #4a90e2;
+    color: white;
     border: none;
+    padding: 10px 20px;
     border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
     cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
 .primary-btn:hover {
-    background-color: #0056b3;
+    background-color: #dbeeff;
 }
 
 /* Form Links */
@@ -582,10 +459,12 @@ body#loginPage {
 }
 
 .form-links a {
-    color: #007bff;
+    color: #4a90e2;
     text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .form-links a:hover {
-    text-decoration: underline;
+    color: #357ab8;
 }
