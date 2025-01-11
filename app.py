@@ -108,10 +108,20 @@ def register():
 # Dashboard page route
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
-    if 'user_id' not in session:
-        # Redirect to login page if user is not authenticated
-        return redirect(url_for('login'))
-    return render_template('dashboard.html', username=session['username'])
+    # Assuming user_id is stored in the session after login
+    user_id = session.get('user_id')
+    if not user_id:
+        return "Unauthorized", 401
+
+    conn = get_db_connection()
+    user = conn.execute('SELECT first_name, last_name FROM users WHERE id = ?', (user_id,)).fetchone()
+    conn.close()
+
+    if not user:
+        return "User not found", 404
+
+    # Pass user data to the template
+    return render_template('dashboard.html', first_name=user['first_name'], last_name=user['last_name'])
 
 if __name__ == '__main__':
     init_db()

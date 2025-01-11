@@ -3,92 +3,265 @@
 /* Padding below the footer and lighter body text */
 
 body {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    color: #5a5a5a;
-  }
-  
-  
-  /* CUSTOMIZE THE CAROUSEL
-  -------------------------------------------------- */
-  
-  /* Carousel base class */
-  .carousel {
-    margin-bottom: 4rem;
-  }
-  /* Since positioning the image, we need to help out the caption */
-  .carousel-caption {
-    bottom: 3rem;
-    z-index: 10;
-  }
-  
-  /* Declare heights because of positioning of img element */
-  .carousel-item {
-    height: 32rem;
-  }
-  .carousel-item > img {
-    position: absolute;
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  overflow-x: hidden;
+  background-color: #000 !important;
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/* Navbar Styles */
+.navbar {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link,
+.navbar-light .navbar-nav .nav-link {
+    font-weight: 500;
+    margin-right: 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+/* Change navbar background color on scroll */
+body.scrolled .navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Change navbar link colors based on background */
+body.scrolled .navbar-dark .nav-link {
+    color: #fff;
+}
+
+body.scrolled .navbar-light .nav-link {
+    color: #000;
+}
+body.scrolled .navbar-nav {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+/* Collapse button color */
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Custom Navbar Styles */
+.custom-navbar {
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    position: fixed;
     top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.custom-navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.custom-navbar .navbar-brand {
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
+.custom-navbar .navbar-toggler {
+    display: block;
+    border: none;
+    background: none;
+}
+
+
+.custom-navbar .navbar-toggler-icon {
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    display: block;
+    position: relative;
+}
+
+.custom-navbar .navbar-toggler-icon::before,
+.custom-navbar .navbar-toggler-icon::after {
+    content: '';
+    width: 30px;
+    height: 3px;
+    background-color: #fff;
+    position: absolute;
     left: 0;
-    min-width: 100%;
-    height: 32rem;
+    transition: transform 0.3s ease;
+}
+
+.custom-navbar .navbar-toggler-icon::before {
+    top: -10px;
+}
+
+.custom-navbar .navbar-toggler-icon::after {
+    top: 10px;
+}
+
+.custom-navbar .navbar-collapse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.custom-navbar .navbar-nav {
+    flex-flow: row;
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.custom-navbar .nav-item {
+    margin-left: 1rem;
+}
+
+.custom-navbar .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover,
+.custom-navbar .nav-link:focus {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Change navbar background color on scroll */
+body.scrolled .custom-navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+#navbar-toggler{
+    display: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .custom-navbar .navbar-toggler {
+        display: block;
+    }
+
+    .custom-navbar .navbar-collapse {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+
+    .custom-navbar .navbar-collapse.show {
+        display: flex;
+        background-color: transparent;
+    }
+
+    .custom-navbar .navbar-nav{
+        width: 100%;
+        flex-flow: column;
+        text-align: start;
+        align-self: start;
+    }
+
+    .custom-navbar .nav-item {
+        margin: 0;
+        padding: 0 2rem;
+        width: 100%;
+        text-align: start;
+    }
+    #navbar-toggler{
+      display: block !important;
+    }
   }
-  
-  
-  /* MARKETING CONTENT
-  -------------------------------------------------- */
-  
-  /* Center align the text within the three columns below the carousel */
-  .marketing .col-lg-4 {
-    margin-bottom: 1.5rem;
-    text-align: center;
+  /* HERO SECTION*/
+#hero{
+  background: 
+      radial-gradient(circle, #6c6c6c8c, #0e0e0ee2),
+      url("Images/oxana-lyashenko-FtNM2H1RXZ8-unsplash\ \(1\).jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+#hero>h1{
+  font-weight: 700;
+}
+
+/* Hero Section Animations */
+@keyframes slideInFromLeft {
+  0% {
+      opacity: 0;
+      transform: translateX(-100%);
   }
-  .marketing h2 {
-    font-weight: 400;
+  100% {
+      opacity: 1;
+      transform: translateX(0);
   }
-  /* rtl:begin:ignore */
-  .marketing .col-lg-4 p {
-    margin-right: .75rem;
-    margin-left: .75rem;
+}
+
+@keyframes slideInFromRight {
+  0% {
+      opacity: 0;
+      transform: translateX(100%);
   }
-  /* rtl:end:ignore */
-  
-  
-  /* Featurettes
-  ------------------------- */
-  
-  .featurette-divider {
-    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  100% {
+      opacity: 1;
+      transform: translateX(0);
   }
-  
-  /* Thin out the marketing headings */
-  .featurette-heading {
-    font-weight: 300;
-    line-height: 1;
-    /* rtl:remove */
-    letter-spacing: -.05rem;
-  }
-  
-  
+}
+
+.hero-h1 {
+  opacity: 0;
+  animation: slideInFromLeft 1s forwards;
+  font-size: 4rem;
+}
+
+.hero-p {
+  opacity: 0;
+  animation: slideInFromRight 1s forwards;
+  font-size: 2rem;
+}
+
+article {
+  border-left: 6px solid white !important;
+  padding-left: 1rem;
+  background-color: #333;
+  border-radius: 0.4rem;
+  padding: 1rem;
+}
   /* RESPONSIVE CSS
   -------------------------------------------------- */
   
-  @media (min-width: 40em) {
-    /* Bump up size of carousel content */
-    .carousel-caption p {
-      margin-bottom: 1.25rem;
-      font-size: 1.25rem;
-      line-height: 1.4;
-    }
-  
-    .featurette-heading {
-      font-size: 50px;
-    }
-  }
-  
-  @media (min-width: 62em) {
-    .featurette-heading {
-      margin-top: 7rem;
-    }
+  @media (max-width: 768px) {
+    
   }
   
