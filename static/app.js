@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Toggle between login and signup forms
+    const loginSection = document.getElementById("LogIn");
     const signUpSection = document.getElementById("SignUp");
     const signUpLink = document.getElementById("sign-up-link");
     const loginLink = document.getElementById("login-link");
