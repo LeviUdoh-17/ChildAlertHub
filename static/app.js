@@ -59,12 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Toggle visibility of password inputs
 document.querySelectorAll(".toggle-password").forEach((toggle) => {
     toggle.addEventListener("click", function () {
-        const passwordField = this.previousElementSibling;
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
+        if (loginPassword.type === "password" || signupPassword.type === "password") {
+            loginPassword.type = "text";
+            signupPassword.type = "text";
             this.textContent = "👁️‍🗨️";
         } else {
-            passwordField.type = "password";
+            loginPassword.type = "password";
+            signupPassword.type = "password";
             this.textContent = "👁️";
         }
     });
