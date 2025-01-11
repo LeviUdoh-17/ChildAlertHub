@@ -149,20 +149,27 @@ if (signupForm) {
 }
 
 const usernameInput = document.getElementById("signup-username");
-usernameInput.addEventListener("blur", async () => {
-    const username = usernameInput.value.trim();
-    if (username) {
-        const response = await fetch(`${REGISTER_URL}/check-username`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username }),
-        });
-        const result = await response.json();
-        if (result.exists) {
-            alert("Username already exists. Please choose a different one.");
+if (usernameInput) {
+    usernameInput.addEventListener("blur", async () => {
+        const username = usernameInput.value.trim();
+        if (!username) return;
+
+        try {
+            const response = await fetch(`${REGISTER_URL}/check-username`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username }),
+            });
+            const result = await response.json();
+            if (result.exists) {
+                alert("Username already exists. Please choose a different one.");
+            }
+        } catch (error) {
+            console.error("Username validation error:", error);
         }
-    }
-});
+    });
+}
+
 
 
 // Toggle between Login and Signup forms
