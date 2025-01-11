@@ -17,18 +17,27 @@ def get_db_connection():
 
 # Initialize the database schema
 def init_db():
-    if not os.path.exists(DATABASE):
-        conn = get_db_connection()
-        with conn:
-            conn.execute('''
-                CREATE TABLE users (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    username TEXT UNIQUE NOT NULL,
-                    password TEXT NOT NULL
-                )
-            ''')
-        conn.close()
+    if os.path.exists(DATABASE):
+        os.remove(DATABASE)
+    conn = get_db_connection()
+    with conn:
+        conn.execute('''
+            CREATE TABLE users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                first_name TEXT NOT NULL,
+                last_name TEXT NOT NULL,
+                username TEXT UNIQUE NOT NULL,
+                email TEXT UNIQUE NOT NULL,
+                password TEXT NOT NULL
+            )
+        ''')
+    conn.close()
 
+conn = get_db_connection()
+users = conn.execute('SELECT * FROM users').fetchall()
+for user in users:
+    print(user)
+conn.close()
 # Home page route
 @app.route('/')
 def home():
@@ -67,11 +76,14 @@ def login():
 def register():
     data = request.json
 
+    first_name = data.get('firstName')
+    last_name = data.get('lastName')
     username = data.get('username')
+    email = data.get('email')
     password = data.get('password')
 
     # Validate inputs
-    if not username or not password:
+    if not first_name or not last_name or not username or not email or not password:
         return jsonify({'error': 'All fields are required'}), 400
 
     hashed_password = generate_password_hash(password)
@@ -79,12 +91,15 @@ def register():
     conn = get_db_connection()
     try:
         conn.execute(
-            'INSERT INTO users (username, password) VALUES (?, ?)',
-            (username, hashed_password)
+            'INSERT INTO users (first_name, last_name, username, email, password) VALUES (?, ?, ?, ?, ?)',
+            (first_name, last_name, username, email, hashed_password)
         )
         conn.commit()
-    except sqlite3.IntegrityError:
-        return jsonify({'error': 'Username already exists'}), 400
+    except sqlite3.IntegrityError as e:
+        if 'username' in str(e):
+            return jsonify({'error': 'Username already exists'}), 400
+        if 'email' in str(e):
+            return jsonify({'error': 'Email already exists'}), 400
     finally:
         conn.close()
 
