@@ -119,7 +119,7 @@ if (signupForm) {
         const username = document.getElementById("signup-username").value.trim();
         const email = document.getElementById("signup-email").value.trim();
         const password = document.getElementById("signup-password").value.trim();
-
+        console.log(firstName, lastName, username, email, password);
         if (!firstName || !lastName || !username || !email || !password) {
             alert("Please fill out all fields.");
             return;
@@ -131,8 +131,8 @@ if (signupForm) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ firstName, lastName, username, email, password }),
             });
-
             const result = await response.json();
+            console.log(response, result);
             if (result.error) {
                 alert(`Signup failed: ${result.error}`);
             } else {
