@@ -32,24 +32,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Toggle between login and signup forms
-    const loginSection = document.getElementById("LogIn");
-    const signUpSection = document.getElementById("SignUp");
-    const signUpLink = document.getElementById("sign-up-link");
-    const loginLink = document.getElementById("login-link");
+    // const loginSection = document.getElementById("LogIn");
+    // const signUpSection = document.getElementById("SignUp");
+    // const signUpLink = document.getElementById("sign-up-link");
+    // const loginLink = document.getElementById("login-link");
 
-    if (signUpLink && loginLink && loginSection && signUpSection) {
-        signUpLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            loginSection.style.display = "none";
-            signUpSection.style.display = "block";
-        });
+    // if (signUpLink && loginLink && loginSection && signUpSection) {
+    //     signUpLink.addEventListener("click", function (event) {
+    //         event.preventDefault();
+    //         loginSection.style.display = "none";
+    //         signUpSection.style.display = "block";
+    //     });
 
-        loginLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            signUpSection.style.display = "none";
-            loginSection.style.display = "block";
-        });
-    }
+    //     loginLink.addEventListener("click", function (event) {
+    //         event.preventDefault();
+    //         signUpSection.style.display = "none";
+    //         loginSection.style.display = "block";
+    //     });
+    // }
 
     // Toggle password visibility
     const loginPassword = document.getElementById('login-password');
