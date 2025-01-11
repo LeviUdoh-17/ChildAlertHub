@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Toggle between login and signup forms
-    const loginSection = document.getElementById("LogIn");
     const signUpSection = document.getElementById("SignUp");
     const signUpLink = document.getElementById("sign-up-link");
     const loginLink = document.getElementById("login-link");
@@ -52,83 +51,117 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Toggle password visibility
-    document.querySelectorAll('.toggle-password').forEach(function(toggle) {
-        toggle.addEventListener('click', function() {
-            const passwordInput = this.previousElementSibling;
-            const isPasswordVisible = passwordInput.type === 'password';
-            passwordInput.type = isPasswordVisible ? 'text' : 'password';
-            this.textContent = isPasswordVisible ? '👁️‍🗨️' : '👁️';
-        });
+    const loginPassword = document.getElementById('login-password');
+    const signupPassword = document.getElementById('signup-password');
+    const togglePassword = document.getElementById('toggle-password');
+
+    // Toggle visibility of password inputs
+document.querySelectorAll(".toggle-password").forEach((toggle) => {
+    toggle.addEventListener("click", function () {
+        const passwordField = this.previousElementSibling;
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            this.textContent = "👁️‍🗨️";
+        } else {
+            passwordField.type = "password";
+            this.textContent = "👁️";
+        }
     });
+});
 
-    // Handle login form submission
-    const loginForm = document.getElementById("login-form");
-    if (loginForm) {
-        loginForm.addEventListener("submit", async function (event) {
-            event.preventDefault();
-            const username = document.getElementById("login-username").value;
-            const password = document.getElementById("login-password").value;
+// Handle login form submission
+const loginForm = document.getElementById("login-form");
+if (loginForm) {
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const username = document.getElementById("login-username").value.trim();
+        const password = document.getElementById("login-password").value.trim();
 
-            try {
-                const response = await fetch(LOGIN_URL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ username, password }),
-                });
+        if (!username || !password) {
+            alert("Please fill out all fields.");
+            return;
+        }
 
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.redirect) {
-                        window.location.href = data.redirect;
-                    } else {
-                        console.error("Unexpected response:", data);
-                        alert("Login successful but no redirect specified.");
-                    }
+        try {
+            const response = await fetch(LOGIN_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.redirect) {
+                    window.location.href = data.redirect;
                 } else {
-                    const errorData = await response.json();
-                    alert(errorData.error || "Login failed. Please try again.");
+                    alert("Login successful but no redirect specified.");
                 }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Login failed due to a network error. Please try again later.");
+            } else {
+                const errorData = await response.json();
+                alert(errorData.error || "Login failed. Please try again.");
             }
-        });
-    }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Login failed due to a network error. Please try again later.");
+        }
+    });
+}
 
-    // Handle signup form submission
-    const signupForm = document.getElementById("signup-form");
-    if (signupForm) {
-        signupForm.addEventListener("submit", async function (event) {
-            event.preventDefault();
-            const firstName = document.getElementById("signup-firstname").value;
-            const lastName = document.getElementById("signup-lastname").value;
-            const username = document.getElementById("signup-username").value;
-            const email = document.getElementById("signup-email").value;
-            const password = document.getElementById("signup-password").value;
+// Handle signup form submission
+const signupForm = document.getElementById("signup-form");
+if (signupForm) {
+    signupForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const firstName = document.getElementById("signup-firstname").value.trim();
+        const lastName = document.getElementById("signup-lastname").value.trim();
+        const username = document.getElementById("signup-username").value.trim();
+        const email = document.getElementById("signup-email").value.trim();
+        const password = document.getElementById("signup-password").value.trim();
 
-            try {
-                const response = await fetch(REGISTER_URL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ firstName, lastName, username, email, password }),
-                });
+        if (!firstName || !lastName || !username || !email || !password) {
+            alert("Please fill out all fields.");
+            return;
+        }
 
-                const result = await response.json();
-                if (result.error) {
-                    alert(`Signup failed: ${result.error}. Please try again.`);
-                } else {
-                    alert("Signup successful! " + result.message);
-                }
-            } catch (error) {
-                console.error("Signup error:", error);
-                alert("Signup failed due to a network error. Please try again later.");
+        try {
+            const response = await fetch(REGISTER_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ firstName, lastName, username, email, password }),
+            });
+
+            const result = await response.json();
+            if (result.error) {
+                alert(`Signup failed: ${result.error}`);
+            } else {
+                alert("Signup successful! " + result.message);
+                // Redirect or reset form on success
+                signupForm.reset();
+                document.getElementById("login-link").click(); // Switch to login form
             }
-        });
-    }
+        } catch (error) {
+            console.error("Signup error:", error);
+            alert("Signup failed due to a network error. Please try again later.");
+        }
+    });
+}
+
+// Toggle between Login and Signup forms
+const loginSection = document.getElementById("LogIn");
+const signupSection = document.getElementById("SignUp");
+
+document.getElementById("sign-up-link").addEventListener("click", function (e) {
+    e.preventDefault();
+    loginSection.style.display = "none";
+    signupSection.style.display = "block";
+});
+
+document.getElementById("login-link").addEventListener("click", function (e) {
+    e.preventDefault();
+    signupSection.style.display = "none";
+    loginSection.style.display = "block";
+});
+
 
     // Counter animation
     const counterElement = document.getElementById("KidnapCases");
