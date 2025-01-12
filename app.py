@@ -2,6 +2,8 @@ from flask import Flask, jsonify, request, render_template, redirect, session, u
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+import smtplib
+from email.message import EmailMessage
 
 app = Flask(__name__)
 
@@ -122,6 +124,90 @@ def dashboard():
 
     # Pass user data to the template
     return render_template('dashboard.html', first_name=user['first_name'], last_name=user['last_name'])
+
+# Placeholder for approved cards
+approved_cards = []
+
+@app.route('/submit-card', methods=['POST'])
+def submit_card():
+    data = request.json
+    title = data.get('title')
+    content = data.get('content')
+
+    if not title or not content:
+        return jsonify({'success': False, 'error': 'Invalid input'}), 400
+
+    # Send approval email (Placeholder logic)
+    msg = EmailMessage()
+    msg['Subject'] = 'Card Approval Request'
+    msg['From'] = 'your_email@example.com'
+    msg['To'] = 'approver_email@example.com'
+    msg.set_content(f"Title: {title}\nContent: {content}\n\nApprove?")
+
+    try:
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login('your_email@example.com', 'your_password')
+            server.send_message(msg)
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+    return jsonify({'success': True})
+
+@app.route('/approve-card', methods=['POST'])
+def approve_card():
+    data = request.json
+    title = data.get('title')
+    content = data.get('content')
+
+    # Add card to approved list (Simulate database entry)
+    approved_cards.append({'title': title, 'content': content})
+    return jsonify({'success': True})
+
+@app.route('/get-approved-cards', methods=['GET'])
+def get_approved_cards():
+    return jsonify({'cards': approved_cards})
+
+# logout route
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.pop('user_id', None)
+    session.pop('username', None)
+    return redirect(url_for('home'))
+
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Ensure upload folder exists
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+@app.route('/submitMissingReport', methods=['POST'])
+def submitMissingReport():
+    # Parse text fields
+    report_firstname = request.form.get('reportFirstname')
+    report_lastname = request.form.get('reportLastname')
+    report_height = request.form.get('reportHeight')
+    report_age = request.form.get('reportAge')
+    report_missing_from = request.form.get('reportMissingFrom')
+    report_missing_since = request.form.get('reportMissingSince')
+    feedback = request.form.get('feedback')
+    personal_firstname = request.form.get('personalFirstname')
+    personal_lastname = request.form.get('personalLastname')
+    personal_age = request.form.get('personalAge')
+    personal_phone_number = request.form.get('personalPhoneNumber')
+    personal_email = request.form.get('personalEmail')
+    personal_details = request.form.get('personalDetails')
+    satisfaction = request.form.get('satisfaction')
+
+    # Handle file uploads
+    images = request.files.getlist('images')
+    for image in images:
+        if image:
+            image.save(os.path.join(app.config['UPLOAD_FOLDER'], image.filename))
+
+    # Insert data into database or process it further
+    # For now, returning success response
+    return jsonify({'success': True, 'message': 'Report submitted successfully.'})
 
 if __name__ == '__main__':
     init_db()

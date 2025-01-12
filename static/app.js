@@ -211,3 +211,126 @@ document.getElementById("login-link").addEventListener("click", function (e) {
         updateCounter();
     }
 });
+
+// Handle form submission
+document.getElementById('card-form').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent page reload
+
+    // Collect form data
+    const reportFirstname = document.getElementById('report-firstname').value.trim();
+    const reportLastname = document.getElementById('report-lastname').value.trim();
+    const reportHeight = document.getElementById('report-height').value.trim();
+    const reportAge = document.getElementById('report-age').value.trim();
+    const reportMissingFrom = document.getElementById('report-MissingFrom').value.trim();
+    const reportMissingSince = document.getElementById('report-MissingSince').value.trim();
+    const feedback = document.getElementById('feedback').value.trim();
+    const personalFirstname = document.getElementById('personal-firstname').value.trim();
+    const personalLastname = document.getElementById('personal-lastname').value.trim();
+    const personalAge = document.getElementById('personal-age').value.trim();
+    const personalPhoneNumber = document.getElementById('personal-phoneNumber').value.trim();
+    const personalEmail = document.getElementById('personal-email').value.trim();
+    const personalDetails = document.getElementById('personalDetails').value.trim();
+
+    // Get selected radio value
+    const satisfactionRadios = document.querySelectorAll('input[name="satisfaction"]');
+    let satisfaction = null;
+    satisfactionRadios.forEach(radio => {
+        if (radio.checked) satisfaction = radio.value;
+    });
+
+    // Validate required fields
+    if (
+        !reportHeight ||
+        !reportAge ||
+        !personalFirstname ||
+        !personalLastname ||
+        !personalAge ||
+        !personalPhoneNumber ||
+        !personalEmail ||
+        !satisfaction
+    ) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    // Validate phone number
+    const phonePattern = /^[0-9]{11}$/;
+    if (!phonePattern.test(personalPhoneNumber)) {
+        alert('Please enter a valid 11-digit phone number.');
+        return;
+    }
+
+    // Validate images
+    const imagesInput = document.getElementById('Image');
+    if (imagesInput.files.length === 0) {
+        alert('Please upload at least one image.');
+        return;
+    }
+
+    // Create form data for submission
+    const formData = new FormData();
+    formData.append('reportFirstname', reportFirstname);
+    formData.append('reportLastname', reportLastname);
+    formData.append('reportHeight', reportHeight);
+    formData.append('reportAge', reportAge);
+    formData.append('reportMissingFrom', reportMissingFrom);
+    formData.append('reportMissingSince', reportMissingSince);
+    formData.append('feedback', feedback);
+    formData.append('personalFirstname', personalFirstname);
+    formData.append('personalLastname', personalLastname);
+    formData.append('personalAge', personalAge);
+    formData.append('personalPhoneNumber', personalPhoneNumber);
+    formData.append('personalEmail', personalEmail);
+    formData.append('personalDetails', personalDetails);
+    formData.append('satisfaction', satisfaction);
+
+    // Append images to form data
+    for (const file of imagesInput.files) {
+        formData.append('images', file);
+    }
+
+    // Send data to the server
+    fetch('/submit-card', {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Your report has been submitted successfully.');
+                document.getElementById('card-form').reset(); // Clear the form
+            } else {
+                alert('Error submitting your report. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting your report.');
+        });
+});
+    
+
+// Fetch and display approved cards
+function fetchApprovedCards() {
+    fetch('/get-approved-cards')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('cards-container');
+            container.innerHTML = ''; // Clear existing cards
+
+            data.cards.forEach(card => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'card';
+                cardElement.innerHTML = `
+                    <h3>${card.title}</h3>
+                    <p>${card.content}</p>
+                    <button onclick="alert('Action for ${card.title}')">Action</button>
+                `;
+                container.appendChild(cardElement);
+            });
+        });
+}
+
+// Fetch cards on page load
+fetchApprovedCards();
+

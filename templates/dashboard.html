@@ -64,7 +64,121 @@
               <p id="note"><b>Note</b>: Details listed for each missing child are based on what was known at the time of their disappearance. Height, weight, and hair colour may have changed.</p>
             </div>
           </section>
+          
+        <section id="card-form-section" class="container py-5">
+          <div class="form-container">
+              <h1>Tip Details<span class="fullstop">.</span></h1>
+              <p>Fill in the details below to report a missing child.</p> 
+              <form class="custom-form" id="card-form">
+                <div class="inline-group">
+                  <div class="form-group">
+                    <input type="text" id="report-firstname" placeholder="First Name (If Known)">
+                    <label for="report-firstname">First Name</label>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="report-lastname" placeholder="Last Name (If Known)">
+                    <label for="report-lastname">Last Name</label>
+                  </div>
+                </div>
+                <div class="inline-group">
+                  <div class="form-group">
+                    <input type="text" id="report-height" placeholder="Height (Approximate) in cm" required>
+                    <label for="report-height">Height</label>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="report-age" placeholder="Age" required>
+                    <label for="report-age">Age</label>
+                  </div>
+                </div>
+                <div class="inline-group">
+                  <div class="form-group">
+                    <input type="text" id="report-MissingFrom" placeholder="Missing From: Location">
+                    <label for="report-MissingFrom">Missing From: Location</label>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="report-MissingSince" placeholder="Missing Since">
+                    <label for="report-MissingSince">Missing Since</label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="file" id="Image" name="image" accept="image/*" placeholder="Input Image" multiple required>
+                  <label for="Image">Input Image</label>
+                </div>
+                <div class="form-group">
+                  <label for="feedback">More Details:</label><br>
+                  <textarea id="feedback" name="feedback" rows="4" cols="50" placeholder="Is there anything more we need to know..."></textarea>
+                </div>
+                <div class="form-group" id="radio">
+                  <label class="radioLabel" for="satisfaction">What Are You Reporting?</label><br>
+                  <div class="inline-group">
+                    <!-- radio -->
+  
+                    <label class="radioLabel" for="ReportingMissing">Reporting Missing Child</label><br>
+                    <input type="radio" id="ReportingMissing" class="me-3" name="satisfaction" value="Reporting Missing Found">
+  
+                    <label class="radioLabel" for="ReportingFound">Reporting Found Child</label><br>
+                    <input type="radio" id="ReportingFound" name="satisfaction" value="Reporting Found Child">
+                  </div>  
+                </div>
+                <h1>Additional information<span class="fullstop">.</span></h1>
+                <p>Let us know who you are</p>
+                <div class="form-group">
+                  <input type="text" id="personal-firstname" placeholder="First Name" required>
+                  <label for="personal-firstname">First Name</label>
+                </div>
+                <div class="form-group">
+                  <input type="text" id="personal-lastname" placeholder="Last Name" required>
+                  <label for="personal-lastname">Last Name</label>
+                </div>
+                <div class="form-group">
+                  <input type="number" id="personal-age" placeholder="Age" min="1" required>
+                  <label for="personal-age">Age</label>
+                </div>
+                <div class="form-group">
+                  <input type="tel" id="personal-phoneNumber" pattern="[0-9]{11}" placeholder="Your Phone Number: 08012345678" required>
+                  <label for="personal-phoneNumber">Phone Number</label>
+                </div>
+                <div class="form-group">
+                  <input type="email" id="personal-email" placeholder="Your Email" required>
+                  <label for="personal-email">Email</label>
+                </div>
+                <div class="form-group">
+                  <label for="personalDetails">More Details:</label><br>
+                  <textarea id="personalDetails" name="personalDetails" rows="4" cols="50" placeholder="Tell Us More About You..."></textarea>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="primary-btn">Log In</button>
+                </div>
+              </form>
+          </div>          
+        </section>
+        <section id="lostCards" class="container py-5">
+          <div class="form-container">
+              <h1>Search Database</h1>
+              <!-- Inline form -->
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Name" aria-label="Search">
+                <!-- sortby -->
+                <select class="form-select" aria-label="Default select example">
+                  <option selected>Sort by</option>
+                  <option value="1">First Name</option>
+                  <option value="2">Last Name</option>
+                  <option value="3">Most Recent</option>
+                  <option value="4">Least Recent</option>
+                </select>  
+                <button class="ms-2 btn btn-outline-primary" type="submit">Search</button>
+              </form>
+          </div>          
+        </section>
+        <!-- Container for Dynamic Cards -->
+        <section id="cards-section">
+            <h2>Approved Cards</h2>
+            <div id="cards-container" class="cards-container">
+                <!-- Cards will be dynamically loaded here -->
+            </div>
+        </section>
         </main>
+
         <footer class="mt-auto text-white-50 text-center border-top mt-4 py-2">
           <p>&copy; Child Report System @ <span id="year"></span></p>
         </footer>         
