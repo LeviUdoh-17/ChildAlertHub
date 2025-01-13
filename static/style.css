@@ -325,6 +325,9 @@ body.scrolled .custom-navbar {
     border-radius: 15px;
     margin: .8rem;
 }
+p.featureCardText {
+    font-size: 1.1rem;
+}
 @media (min-width: 768px) {
     .featureCards {
         flex: 0 0 auto !important;
