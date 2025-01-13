@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template, redirect, session, url_for
+from flask import Flask, jsonify, request, render_template, redirect, session, url_for, send_from_directory
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -179,6 +179,10 @@ def submit_card():
         return jsonify({'success': False, 'error': str(e)}), 500
 
     return jsonify({'success': True, 'message': 'Approval request sent successfully!'})
+# Serve files from the uploads folder
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory('uploads', filename)
 
 @app.route('/approve-card/<int:card_id>', methods=['GET'])
 def approve_card(card_id):
