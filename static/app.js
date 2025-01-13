@@ -188,29 +188,28 @@ document.getElementById("login-link").addEventListener("click", function (e) {
     loginSection.style.display = "block";
 });
 
-
-    // Counter animation
-    const counterElement = document.getElementById("KidnapCases");
-    if (counterElement) {
-        let count = 0;
-        const target = 3620;
-        const duration = 2000;
-        const increment = target / (duration / 16);
-
-        function updateCounter() {
-            count += increment;
-            if (count >= target) {
-                count = target;
-                counterElement.textContent = Math.floor(count);
-                return;
-            }
-            counterElement.textContent = Math.floor(count);
-            requestAnimationFrame(updateCounter);
-        }
-
-        updateCounter();
-    }
 });
+// Counter animation
+const counterElement = document.getElementById("KidnapCases");
+if (counterElement) {
+    let count = 0;
+    const target = 50000;
+    const duration = 2000;
+    const increment = target / (duration / 16);
+
+    function updateCounter() {
+        count += increment;
+        if (count >= target) {
+            count = target;
+            counterElement.textContent = Math.floor(count);
+            return;
+        }
+        counterElement.textContent = Math.floor(count);
+        requestAnimationFrame(updateCounter);
+    }
+
+    updateCounter();
+}
 
 // Handle form submission
 document.getElementById('card-form').addEventListener('submit', function (e) {
@@ -308,29 +307,57 @@ document.getElementById('card-form').addEventListener('submit', function (e) {
             alert('There was an error submitting your report.');
         });
 });
-    
+
 
 // Fetch and display approved cards
-function fetchApprovedCards() {
+function fetchApprovedCards(searchQuery = '', sortBy = '') {
     fetch('/get-approved-cards')
         .then(response => response.json())
         .then(data => {
-            const container = document.getElementById('cards-container');
-            container.innerHTML = ''; // Clear existing cards
+            let filteredCards = data.cards;
 
-            data.cards.forEach(card => {
+            // Apply search filter
+            if (searchQuery) {
+                filteredCards = filteredCards.filter(card =>
+                    `${card.firstname} ${card.lastname}`
+                        .toLowerCase()
+                        .includes(searchQuery.toLowerCase())
+                );
+            }
+
+            // Apply sorting
+            if (sortBy === '1') {
+                filteredCards.sort((a, b) => a.firstname.localeCompare(b.firstname));
+            } else if (sortBy === '2') {
+                filteredCards.sort((a, b) => a.lastname.localeCompare(b.lastname));
+            } else if (sortBy === '3') {
+                filteredCards.sort((a, b) => new Date(b.missingSince) - new Date(a.missingSince));
+            } else if (sortBy === '4') {
+                filteredCards.sort((a, b) => new Date(a.missingSince) - new Date(b.missingSince));
+            }
+
+            // Render cards
+            const container = document.getElementById('cards-container');
+            container.innerHTML = '';
+            filteredCards.forEach(card => {
                 const cardElement = document.createElement('div');
                 cardElement.className = 'card';
                 cardElement.innerHTML = `
-                    <h3>${card.title}</h3>
-                    <p>${card.content}</p>
-                    <button onclick="alert('Action for ${card.title}')">Action</button>
+                    <img src="/uploads/${card.image}" alt="Card Image" class="card-image">
+                    <h3>${card.firstname} ${card.lastname}</h3>
+                    <p>Missing From: ${card.missingFrom}</p>
+                    <button onclick="viewMore('${card.id}')">View More</button>
                 `;
                 container.appendChild(cardElement);
             });
         });
 }
 
-// Fetch cards on page load
-fetchApprovedCards();
+// Add event listener to search form
+document.querySelector('.d-flex').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const searchQuery = document.querySelector('.form-control').value;
+    const sortBy = document.querySelector('.form-select').value;
+    fetchApprovedCards(searchQuery, sortBy);
+});
 

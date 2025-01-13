@@ -128,41 +128,89 @@ def dashboard():
 # Placeholder for approved cards
 approved_cards = []
 
+# Configuration for file uploads
+app.config['UPLOAD_FOLDER'] = 'uploads'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+# Placeholder for pending and approved cards
+pending_cards = []
+approved_cards = []
+
 @app.route('/submit-card', methods=['POST'])
 def submit_card():
-    data = request.json
-    title = data.get('title')
-    content = data.get('content')
+    # Ensure 'images' is in the files
+    image = request.files.get('images')
+    if not image:
+        return jsonify({'success': False, 'error': 'No image provided'}), 400
 
-    if not title or not content:
-        return jsonify({'success': False, 'error': 'Invalid input'}), 400
+    # Parse text fields from the form data
+    title = f"{request.form.get('reportFirstname', '')} {request.form.get('reportLastname', '')}"
+    content = f"Missing From: {request.form.get('reportMissingFrom', '')} since {request.form.get('reportMissingSince', '')}"
 
-    # Send approval email (Placeholder logic)
+    # Save the image temporarily for approval
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
+    image.save(image_path)
+
+    # Store the card in pending cards
+    card_id = len(pending_cards) + 1
+    pending_cards.append({
+        'id': card_id,
+        'firstname': request.form.get('reportFirstname', ''),
+        'lastname': request.form.get('reportLastname', ''),
+        'missingFrom': request.form.get('reportMissingFrom', ''),
+        'missingSince': request.form.get('reportMissingSince', ''),
+        'image': image.filename,
+    })
+
+    # Send approval email
     msg = EmailMessage()
     msg['Subject'] = 'Card Approval Request'
-    msg['From'] = 'your_email@example.com'
-    msg['To'] = 'approver_email@example.com'
-    msg.set_content(f"Title: {title}\nContent: {content}\n\nApprove?")
+    msg['From'] = 'prolev.99@gmail.com'
+    msg['To'] = 'leviudoh17@gmail.com'
+    approval_link = f"https://childalerthub.onrender.com/approve-card/{card_id}"
+    msg.set_content(f"Title: {title}\nContent: {content}\n\nImage: {image.filename}\n\n"
+                    f"Click here to approve: {approval_link}\n\n"
+                    f"Or manually approve via the API.")
 
+    PASSCODE = 'pegb axxi pncx vctw'
     try:
         with smtplib.SMTP('smtp.gmail.com', 587) as server:
             server.starttls()
-            server.login('your_email@example.com', 'your_password')
+            server.login('prolev.99@gmail.com', PASSCODE)
             server.send_message(msg)
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
-    return jsonify({'success': True})
+    return jsonify({'success': True, 'message': 'Approval request sent successfully!'})
+
+@app.route('/approve-card/<int:card_id>', methods=['GET'])
+def approve_card(card_id):
+    # Find card in pending list
+    card = next((c for c in pending_cards if c['id'] == card_id), None)
+    if not card:
+        return jsonify({'success': False, 'error': 'Card not found'}), 404
+
+    # Move card to approved cards
+    approved_cards.append(card)
+    pending_cards.remove(card)
+
+    return jsonify({'success': True, 'message': f'Card {card_id} approved!'})
 
 @app.route('/approve-card', methods=['POST'])
-def approve_card():
+def approve_card_manual():
     data = request.json
-    title = data.get('title')
-    content = data.get('content')
+    card_id = data.get('id')
 
-    # Add card to approved list (Simulate database entry)
-    approved_cards.append({'title': title, 'content': content})
-    return jsonify({'success': True})
+    # Find card in pending list
+    card = next((c for c in pending_cards if c['id'] == card_id), None)
+    if not card:
+        return jsonify({'success': False, 'error': 'Card not found'}), 404
+
+    # Move card to approved cards
+    approved_cards.append(card)
+    pending_cards.remove(card)
+
+    return jsonify({'success': True, 'message': f'Card {card_id} manually approved!'})
 
 @app.route('/get-approved-cards', methods=['GET'])
 def get_approved_cards():
