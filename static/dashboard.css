@@ -286,8 +286,9 @@ article {
 }
 
 .MissingPersonCard h3 {
-    margin-bottom: 8px;
-    font-size: 1.25rem;
+  margin-bottom: 8px;
+  margin-top: 1rem;
+  font-size: 1.25rem;
 }
 
 .MissingPersonCard p {
@@ -295,7 +296,19 @@ article {
     color: #b5b5b5;
 }
 .MissingPersonCard img{
-  width: 13rem;
+  display: inline-block;
+    vertical-align: top;
+    width: 8.5em;
+    max-width: 100%;
+    height: 8.5em;
+    border-radius: 0.25em;
+    -webkit-box-shadow: 0 0.1em 0.2em hsla(0, 0%, 0%, 0.2);
+    box-shadow: 0 0.1em 0.2em hsla(0, 0%, 0%, 0.2);
+    -webkit-filter: brightness(1.05);
+    filter: brightness(1.05);
+    background-repeat: no-repeat;
+    background-position: center 40%;
+    background-size: cover;
 }
 .MissingPersonCard{
   border: 1px solid #ccc;
@@ -472,6 +485,7 @@ textarea#feedback, #personalDetails {
   border: none;
   border-radius: 5px;
   padding: 1rem;
+  color: aliceblue;
 }
 label.radioLabel {
   display: block;

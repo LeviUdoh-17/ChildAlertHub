@@ -16,7 +16,10 @@ a:hover{
   color: #fff !important;
 }
 
-
+p>a:hover{
+  color: #232323 !important;
+  background-color: #c3c1c1de !important;
+}
 /*
  * Base structure
  */
