@@ -285,29 +285,29 @@ article {
     text-align: center;
 }
 
-.card h3 {
+.MissingPersonCard h3 {
     margin-bottom: 8px;
     font-size: 1.25rem;
 }
 
-.card p {
+.MissingPersonCard p {
     margin-bottom: 16px;
     color: #b5b5b5;
 }
-
+.MissingPersonCard img{
+  width: 13rem;
+}
 .MissingPersonCard{
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px;
   background-color: #333;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, .125);
-  border-radius: .25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-.card button {
+.MissingPersonCard button {
     background-color: #4a90e2;
     color: white;
     border: none;
@@ -316,7 +316,7 @@ article {
     cursor: pointer;
 }
 
-.card button:hover {
+.MissingPersonCard button:hover {
     background-color: #fff;
     color: #4a90e2;
 }
