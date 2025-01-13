@@ -310,6 +310,12 @@ article {
     background-position: center 40%;
     background-size: cover;
 }
+@media (max-width: 680px) {
+  .cards-container {
+    flex-flow: column;  
+    justify-content: center;
+    align-items: center;
+}
 .MissingPersonCard{
   border: 1px solid #ccc;
   border-radius: 8px;
