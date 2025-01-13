@@ -125,9 +125,6 @@ def dashboard():
     # Pass user data to the template
     return render_template('dashboard.html', first_name=user['first_name'], last_name=user['last_name'])
 
-# Placeholder for approved cards
-approved_cards = []
-
 # Configuration for file uploads
 app.config['UPLOAD_FOLDER'] = 'uploads'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)

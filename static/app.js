@@ -350,8 +350,13 @@ function fetchApprovedCards(searchQuery = '', sortBy = '') {
                 `;
                 container.appendChild(cardElement);
             });
-        });
+        })
+        .catch(error => console.error('Error fetching approved cards:', error));
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchApprovedCards();
+});
 
 // Add event listener to search form
 document.querySelector('.d-flex').addEventListener('submit', function (e) {
