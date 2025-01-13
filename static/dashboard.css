@@ -295,6 +295,18 @@ article {
     color: #b5b5b5;
 }
 
+.MissingPersonCard{
+  background-color: #333;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+}
+
 .card button {
     background-color: #4a90e2;
     color: white;
@@ -305,7 +317,8 @@ article {
 }
 
 .card button:hover {
-    background-color: #218838;
+    background-color: #fff;
+    color: #4a90e2;
 }
 
 /* Form Container Styles */

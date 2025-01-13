@@ -341,7 +341,7 @@ function fetchApprovedCards(searchQuery = '', sortBy = '') {
             container.innerHTML = '';
             filteredCards.forEach(card => {
                 const cardElement = document.createElement('div');
-                cardElement.className = 'card';
+                cardElement.className= "MissingPersonCard";
                 cardElement.innerHTML = `
                     <img src="/uploads/${card.image}" alt="Card Image" class="card-image">
                     <h3>${card.firstname} ${card.lastname}</h3>
