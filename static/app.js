@@ -341,17 +341,30 @@ function fetchApprovedCards(searchQuery = '', sortBy = '') {
             container.innerHTML = '';
             filteredCards.forEach(card => {
                 const cardElement = document.createElement('div');
-                cardElement.className= "MissingPersonCard";
+                cardElement.className = "MissingPersonCard";
                 cardElement.innerHTML = `
                     <img src="/uploads/${card.image}" alt="Card Image" class="card-image">
                     <h3>${card.firstname} ${card.lastname}</h3>
                     <p>Missing From: ${card.missingFrom}</p>
-                    <button onclick="viewMore('${card.id}')">View More</button>
+                    <button onclick="openModal(${JSON.stringify(card)})">View More</button>
                 `;
                 container.appendChild(cardElement);
             });
         })
         .catch(error => console.error('Error fetching approved cards:', error));
+}
+
+// Function to open the modal with card details
+function openModal(card) {
+    document.getElementById("modal-image").src = card.image;
+    document.getElementById("modal-firstname").innerText = card.firstname;
+    document.getElementById("modal-lastname").innerText = card.lastname;
+    document.getElementById("modal-missingfrom").innerText = "Missing From: " + card.missingfrom;
+    document.getElementById("modal-age").innerText = "Age: " + card.age;
+    document.getElementById("modal-height").innerText = "Height: " + card.height;
+    document.getElementById("modal-missingsince").innerText = "Missing Since: " + card.missingsince;
+    document.getElementById("modal-details").innerText = card.details;
+    modal.style.display = "block";
 }
 
 document.addEventListener('DOMContentLoaded', () => {
