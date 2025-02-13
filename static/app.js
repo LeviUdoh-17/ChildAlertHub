@@ -422,7 +422,7 @@ function displayApprovedCards(cards) {
             <p>Missing From: ${card.missingFrom}</p>
             <button onclick="openModal('${card.id}')">View More</button>
         `;
-        container.appendChild(cardElement);
+        cardsContainer.appendChild(cardElement);
     });
 }
 
