@@ -366,3 +366,5 @@ document.querySelector('.d-flex').addEventListener('submit', function (e) {
     fetchApprovedCards(searchQuery, sortBy);
 });
 
+// Copyright Year
+document.getElementById("year").textContent = new Date().getFullYear();
