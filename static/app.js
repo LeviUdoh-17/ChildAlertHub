@@ -364,14 +364,24 @@ async function openModal(cardId) {
 
             // Populate the modal with card details
             const modalTitle = document.getElementById("modal-title");
-            const modalBody = document.getElementById("modal-body");
+            const modalImage = document.getElementById("modal-image");
+            const modalFirstName = document.getElementById("modal-firstname");
+            const modalLastName = document.getElementById("modal-lastname");
+            const modalMissingFrom = document.getElementById("modal-missingfrom");
+            const modalAge = document.getElementById("modal-age");
+            const modalHeight = document.getElementById("modal-height");
+            const modalMissingSince = document.getElementById("modal-missingsince");
+            const modalDetails = document.getElementById("modal-details");
 
-            modalTitle.textContent = card.title;
-            modalBody.innerHTML = `
-                <p>${card.description}</p>
-                <p><strong>Reported by:</strong> ${card.reported_by}</p>
-                <p><strong>Date:</strong> ${card.date}</p>
-            `;
+            modalTitle.textContent = "More Information";
+            modalImage.src = `/uploads/${card.image}`;
+            modalFirstName.textContent = `First Name: ${card.firstname}`;
+            modalLastName.textContent = `Last Name: ${card.lastname}`;
+            modalMissingFrom.textContent = `Missing From: ${card.missingFrom}`;
+            modalAge.textContent = `Age: ${card.age}`;
+            modalHeight.textContent = `Height: ${card.height}`;
+            modalMissingSince.textContent = `Missing Since: ${card.missingSince}`;
+            modalDetails.textContent = card.details;
 
             // Show the modal
             const modal = new bootstrap.Modal(document.getElementById("cardModal"));
@@ -382,6 +392,38 @@ async function openModal(cardId) {
     } catch (error) {
         console.error("Error fetching card details:", error);
     }
+}
+
+// Fetch and display approved cards
+async function fetchApprovedCards() {
+    try {
+        const response = await fetch('/get-approved-cards');
+        if (response.ok) {
+            const data = await response.json();
+            const cards = data.cards;
+            displayApprovedCards(cards);
+        } else {
+            console.error("Failed to fetch approved cards:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error fetching approved cards:", error);
+    }
+}
+
+function displayApprovedCards(cards) {
+    const cardsContainer = document.getElementById("cards-container");
+    cardsContainer.innerHTML = "";
+    cards.forEach(card => {
+        const cardElement = document.createElement("div");
+        cardElement.className = "card";
+        cardElement.innerHTML = `
+            <h3>${card.firstname} ${card.lastname}</h3>
+            <p>Missing From: ${card.missingFrom}</p>
+            <p>Missing Since: ${card.missingSince}</p>
+            <button class="btn btn-primary" onclick="openModal(${card.id})">View Details</button>
+        `;
+        cardsContainer.appendChild(cardElement);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
