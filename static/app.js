@@ -355,21 +355,33 @@ function fetchApprovedCards(searchQuery = '', sortBy = '') {
 }
 
 // Function to open the modal with card details
-function openModal(cardId) {
-    fetch(`/get-card/${cardId}`)
-        .then(response => response.json())
-        .then(card => {
-            document.getElementById("modal-image").src = card.image;
-            document.getElementById("modal-firstname").innerText = card.firstname;
-            document.getElementById("modal-lastname").innerText = card.lastname;
-            document.getElementById("modal-missingfrom").innerText = "Missing From: " + card.missingfrom;
-            document.getElementById("modal-age").innerText = "Age: " + card.age;
-            document.getElementById("modal-height").innerText = "Height: " + card.height;
-            document.getElementById("modal-missingsince").innerText = "Missing Since: " + card.missingsince;
-            document.getElementById("modal-details").innerText = card.details;
-            modal.style.display = "block";
-        })
-        .catch(error => console.error('Error fetching card details:', error));
+async function openModal(cardId) {
+    try {
+        const response = await fetch(`/get-card-details/${cardId}`);
+        if (response.ok) {
+            const card = await response.json();
+            console.log("Fetched card details:", card); // Debugging log
+
+            // Populate the modal with card details
+            const modalTitle = document.getElementById("modal-title");
+            const modalBody = document.getElementById("modal-body");
+
+            modalTitle.textContent = card.title;
+            modalBody.innerHTML = `
+                <p>${card.description}</p>
+                <p><strong>Reported by:</strong> ${card.reported_by}</p>
+                <p><strong>Date:</strong> ${card.date}</p>
+            `;
+
+            // Show the modal
+            const modal = new bootstrap.Modal(document.getElementById("cardModal"));
+            modal.show();
+        } else {
+            console.error("Failed to fetch card details:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error fetching card details:", error);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

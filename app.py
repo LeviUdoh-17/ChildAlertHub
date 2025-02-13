@@ -217,6 +217,15 @@ def approve_card_manual():
 def get_approved_cards():
     return jsonify({'cards': approved_cards})
 
+@app.route('/get-card-details/<int:card_id>', methods=['GET'])
+def get_card_details(card_id):
+    conn = get_db_connection()
+    card = conn.execute('SELECT * FROM approved_cards WHERE id = ?', (card_id,)).fetchone()
+    conn.close()
+    if card is None:
+        return jsonify({'error': 'Card not found'}), 404
+    return jsonify(dict(card))
+
 # logout route
 @app.route('/logout', methods=['GET'])
 def logout():
