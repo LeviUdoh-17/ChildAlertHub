@@ -223,7 +223,21 @@ def get_card_details(card_id):
     card = next((c for c in approved_cards if c['id'] == card_id), None)
     if card is None:
         return jsonify({'error': 'Card not found'}), 404
-    return jsonify(card)
+    
+    # Ensure the card object has all required fields
+    card_data = {
+        'id': card['id'],
+        'firstname': card.get('firstname', ''),
+        'lastname': card.get('lastname', ''),
+        'missingFrom': card.get('missingFrom', ''),
+        'missingSince': card.get('missingSince', ''),
+        'height': card.get('reportHeight', ''),  # Ensure this matches the form field name
+        'age': card.get('reportAge', ''),       # Ensure this matches the form field name
+        'image': card.get('image', ''),
+        'details': card.get('details', '')      # Add other fields if necessary
+    }
+    return jsonify(card_data)
+    
 
 # logout route
 @app.route('/logout', methods=['GET'])
