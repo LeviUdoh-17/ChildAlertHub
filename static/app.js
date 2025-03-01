@@ -439,4 +439,4 @@ document.querySelector('.d-flex').addEventListener('submit', function (e) {
 });
 
 // Copyright Year
-document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementsByClassName("year").textContent = new Date().getFullYear();
