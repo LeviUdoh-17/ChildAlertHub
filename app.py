@@ -141,8 +141,20 @@ def submit_card():
         return jsonify({'success': False, 'error': 'No image provided'}), 400
 
     # Parse text fields from the form data
-    title = f"{request.form.get('reportFirstname', '')} {request.form.get('reportLastname', '')}"
-    content = f"Missing From: {request.form.get('reportMissingFrom', '')} since {request.form.get('reportMissingSince', '')}"
+    report_firstname = request.form.get('reportFirstname', '')
+    report_lastname = request.form.get('reportLastname', '')
+    report_height = request.form.get('reportHeight', '')
+    report_age = request.form.get('reportAge', '')
+    report_missing_from = request.form.get('reportMissingFrom', '')
+    report_missing_since = request.form.get('reportMissingSince', '')
+    feedback = request.form.get('feedback', '')
+    personal_firstname = request.form.get('personalFirstname', '')
+    personal_lastname = request.form.get('personalLastname', '')
+    personal_age = request.form.get('personalAge', '')
+    personal_phone_number = request.form.get('personalPhoneNumber', '')
+    personal_email = request.form.get('personalEmail', '')
+    personal_details = request.form.get('personalDetails', '')
+    satisfaction = request.form.get('satisfaction', '')
 
     # Save the image temporarily for approval
     image_path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
@@ -152,11 +164,21 @@ def submit_card():
     card_id = len(pending_cards) + 1
     pending_cards.append({
         'id': card_id,
-        'firstname': request.form.get('reportFirstname', ''),
-        'lastname': request.form.get('reportLastname', ''),
-        'missingFrom': request.form.get('reportMissingFrom', ''),
-        'missingSince': request.form.get('reportMissingSince', ''),
+        'firstname': report_firstname,
+        'lastname': report_lastname,
+        'missingFrom': report_missing_from,
+        'missingSince': report_missing_since,
+        'height': report_height,
+        'age': report_age,
         'image': image.filename,
+        'details': feedback,
+        'reporter_firstname': personal_firstname,
+        'reporter_lastname': personal_lastname,
+        'reporter_age': personal_age,
+        'reporter_phone': personal_phone_number,
+        'reporter_email': personal_email,
+        'reporter_details': personal_details,
+        'satisfaction': satisfaction
     })
 
     # Send approval email
@@ -165,9 +187,45 @@ def submit_card():
     msg['From'] = 'prolev.99@gmail.com'
     msg['To'] = 'leviudoh17@gmail.com'
     approval_link = f"https://childalerthub.onrender.com/approve-card/{card_id}"
-    msg.set_content(f"Title: {title}\nContent: {content}\n\nImage: {image.filename}\n\n"
-                    f"Click here to approve: {approval_link}\n\n"
-                    f"Or manually approve via the API.")
+    msg.set_content(f"""
+Details of Missing Person
+{satisfaction}
+
+Full name: {report_firstname} {report_lastname}
+Was missing from: {report_missing_from} since {report_missing_since}
+You should also know that {feedback}
+An image of the missing person is attached.
+
+Details of the Person Reporting
+Full name: {personal_firstname} {personal_lastname}
+Phone number: {personal_phone_number}
+Email address: {personal_email}
+More details: {personal_details}
+
+Click here to approve: {approval_link}
+""")
+    msg.add_alternative(f"""
+<html>
+    <body>
+        <h2>Details of Missing Person</h2>
+        <p>{satisfaction}</p>
+        <p><strong>Full name:</strong> {report_firstname} {report_lastname}</p>
+        <p><strong>Was missing from:</strong> {report_missing_from} since {report_missing_since}</p>
+        <p><strong>You should also know that:</strong> {feedback}</p>
+        <p><strong>An image of the missing person is attached below:</strong></p>
+        <img src="cid:image1" style="display: block; margin-left: auto; margin-right: auto; width: 300px; height: auto;" alt="Missing Person Image">
+        <h2>Details of the Person Reporting</h2>
+        <p><strong>Full name:</strong> {personal_firstname} {personal_lastname}</p>
+        <p><strong>Phone number:</strong> {personal_phone_number}</p>
+        <p><strong>Email address:</strong> {personal_email}</p>
+        <p><strong>More details:</strong> {personal_details}</p>
+        <p><a href="{approval_link}">Click here to approve</a></p>
+    </body>
+</html>
+""", subtype='html')
+
+    with open(image_path, 'rb') as img:
+        msg.get_payload()[1].add_related(img.read(), maintype='image', subtype=image.filename.split('.')[-1], cid='image1')
 
     PASSCODE = 'pegb axxi pncx vctw'
     try:
@@ -179,6 +237,7 @@ def submit_card():
         return jsonify({'success': False, 'error': str(e)}), 500
 
     return jsonify({'success': True, 'message': 'Approval request sent successfully!'})
+
 # Serve files from the uploads folder
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
