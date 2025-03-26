@@ -206,11 +206,12 @@ body.scrolled .custom-navbar {
 #hero{
   background: 
       radial-gradient(circle, #6c6c6c8c, #0e0e0ee2),
-      url("Images/oxana-lyashenko-FtNM2H1RXZ8-unsplash\ \(1\).jpg");
+      url("Images/BlackBackground_edited.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   height: 100vh;
+  max-width: 100vw;
 }
 #hero>h1{
   font-weight: 700;

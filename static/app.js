@@ -194,7 +194,7 @@ const counterElement = document.getElementById("KidnapCases");
 if (counterElement) {
     let count = 0;
     const target = 50000;
-    const duration = 2000;
+    const duration = 15000;
     const increment = target / (duration / 16);
 
     function updateCounter() {
