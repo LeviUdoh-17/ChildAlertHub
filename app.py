@@ -194,7 +194,6 @@ Details of Missing Person
 Full name: {report_firstname} {report_lastname}
 Was missing from: {report_missing_from} since {report_missing_since}
 You should also know that {feedback}
-An image of the missing person is attached.
 
 Details of the Person Reporting
 Full name: {personal_firstname} {personal_lastname}
@@ -278,26 +277,13 @@ def get_approved_cards():
 
 @app.route('/get-card-details/<int:card_id>', methods=['GET'])
 def get_card_details(card_id):
-    # Assuming approved_cards is a list of dictionaries
-    card = next((c for c in approved_cards if c['id'] == card_id), None)
+    conn = get_db_connection()
+    card = conn.execute('SELECT * FROM approved_cards WHERE id = ?', (card_id,)).fetchone()
+    conn.close()
     if card is None:
         return jsonify({'error': 'Card not found'}), 404
+    return jsonify(dict(card))
     
-    # Ensure the card object has all required fields
-    card_data = {
-        'id': card['id'],
-        'firstname': card.get('firstname', ''),
-        'lastname': card.get('lastname', ''),
-        'missingFrom': card.get('missingFrom', ''),
-        'missingSince': card.get('missingSince', ''),
-        'height': card.get('reportHeight', ''),  # Ensure this matches the form field name
-        'age': card.get('reportAge', ''),       # Ensure this matches the form field name
-        'image': card.get('image', ''),
-        'details': card.get('details', '')      # Add other fields if necessary
-    }
-    return jsonify(card_data)
-    
-
 # logout route
 @app.route('/logout', methods=['GET'])
 def logout():

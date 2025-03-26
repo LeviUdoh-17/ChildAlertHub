@@ -308,52 +308,6 @@ document.getElementById('card-form').addEventListener('submit', function (e) {
         });
 });
 
-
-// // Fetch and display approved cards
-// function fetchApprovedCards(searchQuery = '', sortBy = '') {
-//     fetch('/get-approved-cards')
-//         .then(response => response.json())
-//         .then(data => {
-//             let filteredCards = data.cards;
-
-//             // Apply search filter
-//             if (searchQuery) {
-//                 filteredCards = filteredCards.filter(card =>
-//                     `${card.firstname} ${card.lastname}`
-//                         .toLowerCase()
-//                         .includes(searchQuery.toLowerCase())
-//                 );
-//             }
-
-//             // Apply sorting
-//             if (sortBy === '1') {
-//                 filteredCards.sort((a, b) => a.firstname.localeCompare(b.firstname));
-//             } else if (sortBy === '2') {
-//                 filteredCards.sort((a, b) => a.lastname.localeCompare(b.lastname));
-//             } else if (sortBy === '3') {
-//                 filteredCards.sort((a, b) => new Date(b.missingSince) - new Date(a.missingSince));
-//             } else if (sortBy === '4') {
-//                 filteredCards.sort((a, b) => new Date(a.missingSince) - new Date(b.missingSince));
-//             }
-
-//             // Render cards
-//             const container = document.getElementById('cards-container');
-//             container.innerHTML = '';
-//             filteredCards.forEach(card => {
-//                 const cardElement = document.createElement('div');
-//                 cardElement.className = "MissingPersonCard";
-//                 cardElement.innerHTML = `
-//                     <img src="/uploads/${card.image}" alt="Card Image" class="card-image">
-//                     <h3>${card.firstname} ${card.lastname}</h3>
-//                     <p>Missing From: ${card.missingFrom}</p>
-//                     <button onclick="openModal('${card.id}')">View More</button>
-//                 `;
-//                 container.appendChild(cardElement);
-//             });
-//         })
-//         .catch(error => console.error('Error fetching approved cards:', error));
-// }
-
 // Function to open the modal with card details
 async function openModal(cardId) {
     try {
@@ -420,7 +374,7 @@ function displayApprovedCards(cards) {
             <img src="/uploads/${card.image}" alt="Card Image" class="card-image">
             <h3>${card.firstname} ${card.lastname}</h3>
             <p>Missing From: ${card.missingFrom}</p>
-            <button onclick="openModal('${card.id}')">View More</button>
+            <button class="btn btn-primary" onclick="openModal(${card.id})">View More</button>
         `;
         cardsContainer.appendChild(cardElement);
     });
