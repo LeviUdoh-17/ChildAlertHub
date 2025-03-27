@@ -74,10 +74,17 @@ document.querySelectorAll(".toggle-password").forEach((toggle) => {
 // Handle toast
 function showToast(message, type = 'success') {
     const toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        console.error("Toast container not found.");
+        return;
+    }
+
     const toast = document.createElement('div');
+    // Dynamically set the class based on the type
     toast.className = `toast ${type === 'success' ? 'toast-success' : 'toast-error'}`;
     toast.textContent = message;
 
+    // Append the toast to the container
     toastContainer.appendChild(toast);
 
     // Remove the toast after 4 seconds
