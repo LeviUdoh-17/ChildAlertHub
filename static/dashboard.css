@@ -293,11 +293,11 @@ article {
 }
 
 .toast-success {
-  background-color: #28a745; /* Green for success */
+  background-color: #28a745 !important; /* Green for success */
 }
 
 .toast-error {
-  background-color: #dc3545; /* Red for error */
+  background-color: #dc3545 !important; /* Red for error */
 }
 
 @keyframes fadeInOut {
