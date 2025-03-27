@@ -95,7 +95,7 @@ if (loginForm) {
         const password = document.getElementById("login-password").value.trim();
 
         if (!username || !password) {
-            showToast('Please fill out all fields.');
+            showToast('Please fill out all fields.', 'error');
             return;
         }
 
@@ -136,7 +136,7 @@ if (signupForm) {
         const password = document.getElementById("signup-password").value.trim();
         console.log(firstName, lastName, username, email, password);
         if (!firstName || !lastName || !username || !email || !password) {
-            showToast('Please fill out all fields.');
+            showToast('Please fill out all fields.', 'error');
             return;
         }
 
@@ -177,7 +177,7 @@ if (usernameInput) {
             });
             const result = await response.json();
             if (result.exists) {
-                showToast("Username already exists. Please choose a different one.");
+                showToast("Username already exists. Please choose a different one.", 'error');
             }
         } catch (error) {
             console.error("Username validation error:", error);
