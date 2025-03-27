@@ -33,6 +33,27 @@ def init_db():
                 password TEXT NOT NULL
             )
         ''')
+         # Create the approved_cards table
+        conn.execute('''
+            CREATE TABLE approved_cards (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                firstname TEXT NOT NULL,
+                lastname TEXT NOT NULL,
+                missingFrom TEXT NOT NULL,
+                missingSince TEXT NOT NULL,
+                height TEXT,
+                age TEXT,
+                image TEXT NOT NULL,
+                details TEXT,
+                reporter_firstname TEXT NOT NULL,
+                reporter_lastname TEXT NOT NULL,
+                reporter_age TEXT,
+                reporter_phone TEXT NOT NULL,
+                reporter_email TEXT NOT NULL,
+                reporter_details TEXT,
+                satisfaction TEXT
+            )
+        ''')
     conn.close()
 
 conn = get_db_connection()
@@ -249,8 +270,24 @@ def approve_card(card_id):
     if not card:
         return jsonify({'success': False, 'error': 'Card not found'}), 404
 
-    # Move card to approved cards
-    approved_cards.append(card)
+    # Insert card into the approved_cards table
+    conn = get_db_connection()
+    conn.execute('''
+        INSERT INTO approved_cards (
+            firstname, lastname, missingFrom, missingSince, height, age, image, details,
+            reporter_firstname, reporter_lastname, reporter_age, reporter_phone, reporter_email,
+            reporter_details, satisfaction
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        card['firstname'], card['lastname'], card['missingFrom'], card['missingSince'],
+        card['height'], card['age'], card['image'], card['details'],
+        card['reporter_firstname'], card['reporter_lastname'], card['reporter_age'],
+        card['reporter_phone'], card['reporter_email'], card['reporter_details'], card['satisfaction']
+    ))
+    conn.commit()
+    conn.close()
+
+    # Remove card from pending list
     pending_cards.remove(card)
 
     return jsonify({'success': True, 'message': f'Card {card_id} approved!'})
@@ -327,4 +364,5 @@ def submitMissingReport():
 
 if __name__ == '__main__':
     init_db()
+    print("Database initialized")
     app.run(debug=True)
