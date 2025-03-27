@@ -274,6 +274,45 @@ article {
     flex-wrap: wrap;
     gap: 16px;
     margin: 2rem;
+    justify-content: center;
+}
+/* Toast */
+.toast-container {
+  max-width: 300px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: white;
+  animation: fadeInOut 4s ease-in-out;
+}
+
+.toast-success {
+  background-color: #28a745; /* Green for success */
+}
+
+.toast-error {
+  background-color: #dc3545; /* Red for error */
+}
+
+@keyframes fadeInOut {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  10%, 90% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+  100% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
 }
 
 .card {

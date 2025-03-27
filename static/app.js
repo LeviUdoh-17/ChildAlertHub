@@ -71,6 +71,21 @@ document.querySelectorAll(".toggle-password").forEach((toggle) => {
     });
 });
 
+// Handle toast
+function showToast(message, type = 'success') {
+    const toastContainer = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type === 'success' ? 'toast-success' : 'toast-error'}`;
+    toast.textContent = message;
+
+    toastContainer.appendChild(toast);
+
+    // Remove the toast after 4 seconds
+    setTimeout(() => {
+        toast.remove();
+    }, 4000);
+}
+
 // Handle login form submission
 const loginForm = document.getElementById("login-form");
 if (loginForm) {
@@ -80,7 +95,7 @@ if (loginForm) {
         const password = document.getElementById("login-password").value.trim();
 
         if (!username || !password) {
-            alert("Please fill out all fields.");
+            showToast('Please fill out all fields.');
             return;
         }
 
@@ -96,15 +111,15 @@ if (loginForm) {
                 if (data.redirect) {
                     window.location.href = data.redirect;
                 } else {
-                    alert("Login successful but no redirect specified.");
+                    showToast('Login successful but no redirect specified.', 'Success');
                 }
             } else {
                 const errorData = await response.json();
-                alert(errorData.error || "Login failed. Please try again.");
+                showToast(errorData.error || 'Login failed. Please try again.', 'error');
             }
         } catch (error) {
             console.error("Error:", error);
-            alert("Login failed due to a network error. Please try again later.");
+            showToast(errorData.error || 'Login failed due to a network error. Please try again later.', 'error');
         }
     });
 }
@@ -121,7 +136,7 @@ if (signupForm) {
         const password = document.getElementById("signup-password").value.trim();
         console.log(firstName, lastName, username, email, password);
         if (!firstName || !lastName || !username || !email || !password) {
-            alert("Please fill out all fields.");
+            showToast('Please fill out all fields.');
             return;
         }
 
@@ -134,16 +149,16 @@ if (signupForm) {
             const result = await response.json();
             console.log(response, result);
             if (result.error) {
-                alert(`Signup failed: ${result.error}`);
+                showToast(`Signup failed: ${result.error}`, 'error');
             } else {
-                alert("Signup successful! " + result.message);
+                showToast('Signup successful!', 'success');
                 // Redirect or reset form on success
                 signupForm.reset();
                 document.getElementById("login-link").click(); // Switch to login form
             }
         } catch (error) {
             console.error("Signup error:", error);
-            alert("Signup failed due to a network error. Please try again later.");
+            showToast(`Signup failed: ${result.error}`, 'error');
         }
     });
 }
@@ -162,7 +177,7 @@ if (usernameInput) {
             });
             const result = await response.json();
             if (result.exists) {
-                alert("Username already exists. Please choose a different one.");
+                showToast("Username already exists. Please choose a different one.");
             }
         } catch (error) {
             console.error("Username validation error:", error);
@@ -296,15 +311,15 @@ document.getElementById('card-form').addEventListener('submit', function (e) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('Your report has been submitted successfully.');
+                showToast('Your report has been submitted successfully.', 'success');
                 document.getElementById('card-form').reset(); // Clear the form
             } else {
-                alert('Error submitting your report. Please try again.');
+                showToast('Error submitting your report. Please try again.', 'error');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('There was an error submitting your report.');
+            showToast('There was an error submitting your report.', 'error');
         });
 });
 
