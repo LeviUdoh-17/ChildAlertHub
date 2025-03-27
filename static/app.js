@@ -311,6 +311,7 @@ document.getElementById('card-form').addEventListener('submit', function (e) {
 // Function to open the modal with card details
 async function openModal(cardId) {
     try {
+        console.log("Fetching details for card ID:", cardId); // Debugging log
         const response = await fetch(`/get-card-details/${cardId}`);
         if (response.ok) {
             const card = await response.json();
@@ -334,10 +335,10 @@ async function openModal(cardId) {
             const modal = new bootstrap.Modal(document.getElementById("cardModal"));
             modal.show();
         } else {
-            console.error("Failed to fetch card details:", response.statusText);
+            console.error("Failed to fetch card details:", response.statusText); // Debugging log
         }
     } catch (error) {
-        console.error("Error fetching card details:", error);
+        console.error("Error fetching card details:", error); // Debugging log
     }
 }
 
@@ -361,6 +362,7 @@ function displayApprovedCards(cards) {
     const cardsContainer = document.getElementById("cards-container");
     cardsContainer.innerHTML = "";
     cards.forEach(card => {
+        console.log("Rendering card:", card); // Debugging log
         const cardElement = document.createElement('div');
         cardElement.className = "MissingPersonCard";
         cardElement.innerHTML = `
