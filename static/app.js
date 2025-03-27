@@ -318,8 +318,8 @@ document.getElementById('card-form').addEventListener('submit', function (e) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                showToast('Your report has been submitted successfully.', 'success');
                 document.getElementById('card-form').reset(); // Clear the form
+                showToast('Your report has been submitted successfully.', 'success');
             } else {
                 showToast('Error submitting your report. Please try again.', 'error');
             }
