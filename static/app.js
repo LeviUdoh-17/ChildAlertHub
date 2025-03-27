@@ -319,23 +319,16 @@ async function openModal(cardId) {
             // Populate the modal with card details
             const modalTitle = document.getElementById("modal-title");
             const modalImage = document.getElementById("modal-image");
-            const modalFirstName = document.getElementById("modal-firstname");
-            const modalLastName = document.getElementById("modal-lastname");
-            const modalMissingFrom = document.getElementById("modal-missingfrom");
-            const modalAge = document.getElementById("modal-age");
-            const modalHeight = document.getElementById("modal-height");
-            const modalMissingSince = document.getElementById("modal-missingsince");
+            const modalFullName = document.getElementById("modal-fullname");
+            const modalMissingInfo = document.getElementById("modal-missinginfo");
             const modalDetails = document.getElementById("modal-details");
 
-            modalTitle.textContent = "More Information";
+            modalTitle.textContent = "Details of Missing Person";
             modalImage.src = `/uploads/${card.image}`;
-            modalFirstName.textContent = `First Name: ${card.firstname}`;
-            modalLastName.textContent = `Last Name: ${card.lastname}`;
-            modalMissingFrom.textContent = `Missing From: ${card.missingFrom}`;
-            modalAge.textContent = `Age: ${card.age}`;
-            modalHeight.textContent = `Height: ${card.height}`;
-            modalMissingSince.textContent = `Missing Since: ${card.missingSince}`;
-            modalDetails.textContent = card.details;
+            modalImage.alt = `Image of ${card.firstname} ${card.lastname}`;
+            modalFullName.textContent = `Full Name: ${card.firstname} ${card.lastname}`;
+            modalMissingInfo.textContent = `Missing Since: ${card.missingSince}, Last Seen: ${card.missingFrom}`;
+            modalDetails.textContent = `Additional Details: ${card.details}`;
 
             // Show the modal
             const modal = new bootstrap.Modal(document.getElementById("cardModal"));
