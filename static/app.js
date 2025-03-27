@@ -345,9 +345,11 @@ async function openModal(cardId) {
 // Fetch and display approved cards
 async function fetchApprovedCards() {
     try {
+        console.log("Fetching approved cards..."); // Debugging log
         const response = await fetch('/get-approved-cards');
         if (response.ok) {
             const data = await response.json();
+            console.log("Approved cards fetched:", data); // Debugging log
             const cards = data.cards;
             displayApprovedCards(cards);
         } else {
@@ -360,7 +362,12 @@ async function fetchApprovedCards() {
 
 function displayApprovedCards(cards) {
     const cardsContainer = document.getElementById("cards-container");
-    cardsContainer.innerHTML = "";
+    cardsContainer.innerHTML = ""; // Clear existing cards
+    if (cards.length === 0) {
+        console.log("No approved cards to display."); // Debugging log
+        cardsContainer.innerHTML = "<p>No approved cards found.</p>";
+        return;
+    }
     cards.forEach(card => {
         console.log("Rendering card:", card); // Debugging log
         const cardElement = document.createElement('div');

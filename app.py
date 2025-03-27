@@ -310,7 +310,12 @@ def approve_card_manual():
 
 @app.route('/get-approved-cards', methods=['GET'])
 def get_approved_cards():
-    return jsonify({'cards': approved_cards})
+    conn = get_db_connection()
+    cards = conn.execute('SELECT * FROM approved_cards').fetchall()
+    conn.close()
+    if not cards:
+        return jsonify({'cards': []})  # Return an empty list if no cards are found
+    return jsonify({'cards': [dict(card) for card in cards]})
 
 @app.route('/get-card-details/<int:card_id>', methods=['GET'])
 def get_card_details(card_id):
